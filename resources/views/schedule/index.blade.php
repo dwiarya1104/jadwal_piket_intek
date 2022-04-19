@@ -142,7 +142,7 @@
                                 <span class='badge badge-danger'>{{$schedule->status}}</span>
                             @endif
                         </td>
-                        <td><img src="{{ asset('bukti/'. $schedule->upload_bukti)}}" alt=""/></td>
+                        <td><img src="{{ asset('bukti/'. $schedule->upload_bukti)}}" alt=""  style="width: 50px;" ></td>
                         {{-- <img src="{{asset('assets/img/undraw_profile.svg')}}" alt=""/> --}}
                         <td>
                             <a href="#" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
@@ -173,7 +173,7 @@
                                 <span class='badge badge-danger'>{{$schedule->status}}</span>
                             @endif
                         </td>
-                        <td><img src="{{ asset('bukti/'. $schedule->upload_bukti)}}" alt="" style="width: 40px;"></td>
+                        <td><img src="{{ asset('bukti/'. $schedule->upload_bukti)}}" alt="" style="width: 50px;"></td>
                         {{-- <img src="{{asset('assets/img/undraw_profile.svg')}}" alt=""/> --}}
                         <td>
                             <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i></a>
