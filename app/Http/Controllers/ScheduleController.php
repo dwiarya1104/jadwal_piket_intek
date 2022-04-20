@@ -105,7 +105,12 @@ class ScheduleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Schedule::find($id);
+        $users = User::orderBy('name','ASC')
+        ->get()
+        ->pluck('name','id');
+
+        return view('schedule.edit',compact(['data', 'users']));
     }
 
     /**
