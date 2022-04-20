@@ -91,6 +91,12 @@
 
 <section>
 <div class="container-fluid">
+    @if ($message = Session::get('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert    ">
+    <button type="button" class="close" data-dismiss="alert" aria-label="close">×</button>
+    <strong>{{ $message }}</strong>
+</div>
+@endif
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">

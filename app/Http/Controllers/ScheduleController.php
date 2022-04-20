@@ -131,6 +131,6 @@ class ScheduleController extends Controller
         $data = Schedule::find($id);
         $data->delete();
 
-        return redirect()->route('schedule.index')->with('success','Successfuly Delete Data');
+        return redirect()->route('schedule.index')->with('success','Successfuly Delete Schedule');
     }
 }
