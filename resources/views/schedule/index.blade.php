@@ -183,7 +183,7 @@
                         {{-- <img src="{{asset('assets/img/undraw_profile.svg')}}" alt=""/> --}}
                         <td>
                             <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-eye"></i></a>
-                            <a href="#" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                            <a href="{{route('schedule.edit', $schedule->id)}}" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
                             <a href="{{route('schedule.delete', $schedule->id)}}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Users?')"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
