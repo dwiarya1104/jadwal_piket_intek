@@ -39,12 +39,12 @@
 
         <div class="form-group">
             <label for="#" class="font-weight-bold h6 mt-3">Start Time</label>
-            <input type="date" class="form-control" name="start_time" id="start_time" placeholder="Start Time">
+            <input type="datetime-local" class="form-control" id="startTime" name="start_time" id="start_time" placeholder="Start Time">
         </div>
 
         <div class="form-group">
             <label for="end_time" class="font-weight-bold h6">End Time</label>
-            <input type="date" class="form-control" name="end_time" id="end_time" placeholder="End Time">
+            <input type="datetime-local" class="form-control" id="endTime" name="end_time" id="end_time" placeholder="End Time">
         </div>
 
         <label for="#" class="font-weight-bold h6">Status</label>
@@ -78,7 +78,5 @@
           </div>
         </form>
     </div>
-</div>
-
 </div>
 @endsection
