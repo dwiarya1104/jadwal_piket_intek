@@ -23,14 +23,12 @@ class ScheduleController extends Controller
         ->pluck('name','id');
         // get data users for dropwdown
 
-        // data berdasarkan auth yang login
+        // munclin data berdasarkan user yang login
         $user = Auth::user();
         $data = Schedule::where('user_id', $user->id)->get();
         $dataadmin = Schedule::all();
-        // $allData = $users->merge($data);
 
-        // $dataadmin = Schedule::all();
-        return view('schedule.index',compact(['users','data','dataadmin','status']));
+        return view('schedule.index',compact(['users','data','dataadmin']));
     }
 
     /**
@@ -69,7 +67,7 @@ class ScheduleController extends Controller
             "start_time" => 'required',
             "end_time" => 'required',
             "status" => 'required',
-            // "upload_bukti" => 'file|max:3072',
+            "upload_bukti" => 'file|max:3072',
         ]);
 
         $data = new Schedule();
