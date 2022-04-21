@@ -66,8 +66,6 @@ class ScheduleController extends Controller
             "user_id" => 'required',
             "start_time" => 'required',
             "end_time" => 'required',
-            "status" => 'required',
-            "upload_bukti" => 'file|max:3072',
         ]);
 
         $data = new Schedule();
@@ -77,11 +75,6 @@ class ScheduleController extends Controller
         $data->user_id = $request->user_id;
         $data->start_time = $request->start_time;
         $data->end_time = $request->end_time;
-        $data->status = $request->status;
-        if($request->hasFile('upload_bukti')) {
-            $request->file('upload_bukti')->move('bukti/',$request->file('upload_bukti')->getClientOriginalName());
-        }
-        $data->upload_bukti = $request->file('upload_bukti')->getClientOriginalName();
         $data->save();
         return redirect() -> route('schedule.index')->with('success','Successfully Added Schedule');
     }
@@ -124,6 +117,32 @@ class ScheduleController extends Controller
     {
         //
     }
+
+    public function editUser($id) {
+        $data = Schedule::find($id);
+
+        return view('schedule.editUser',compact(['data']));
+    }
+
+    public function updateUser(Request $request, Schedule $schedule,$id)
+    {
+        $data = Schedule::where('id', $id)->firstOrFail();
+
+        $request->validate([
+            "status" => 'required',
+            "upload_bukti" => 'file|max:3072',
+        ]);
+
+        $data->status = $request->status;
+        if($request->hasFile('upload_bukti')) {
+            $request->file('upload_bukti')->move('bukti/',$request->file('upload_bukti')->getClientOriginalName());
+        }
+        $data->upload_bukti = $request->file('upload_bukti')->getClientOriginalName();
+        $data->update();
+
+        return redirect()->route('schedule.index')->with('success', 'Successfully Updated Schedule');
+    }
+
 
     /**
      * Remove the specified resource from storage.
