@@ -18,9 +18,9 @@ class ScheduleController extends Controller
     public function index()
     {
         // get data users for dropwdown
-        $users = User::orderBy('name','ASC')
-        ->get()
-        ->pluck('name','id');
+        $users = User::orderBy('name', 'ASC')
+            ->get()
+            ->pluck('name', 'id');
         // get data users for dropwdown
 
         // munclin data berdasarkan user yang login
@@ -28,7 +28,7 @@ class ScheduleController extends Controller
         $data = Schedule::where('user_id', $user->id)->get();
         $dataadmin = Schedule::all();
 
-        return view('schedule.index',compact(['users','data','dataadmin']));
+        return view('schedule.index', compact(['users', 'data', 'dataadmin']));
     }
 
     /**
@@ -38,13 +38,13 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        $users = User::orderBy('name','ASC')
-        ->get()
-        ->pluck('name','id');
+        $users = User::orderBy('name', 'ASC')
+            ->get()
+            ->pluck('name', 'id');
 
         $data = Schedule::all();
         // dd($data);
-        return view('schedule.create',compact(['users','data']));
+        return view('schedule.create', compact(['users', 'data']));
     }
 
     /**
@@ -56,11 +56,11 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
 
-        $users = User::orderBy('name','ASC')
-        ->get()
-        ->pluck('name','id');
+        $users = User::orderBy('name', 'ASC')
+            ->get()
+            ->pluck('name', 'id');
 
-        $this->validate($request,[
+        $this->validate($request, [
             "task_title" => 'required',
             "task_description" => 'required',
             "user_id" => 'required',
@@ -76,7 +76,7 @@ class ScheduleController extends Controller
         $data->start_time = $request->start_time;
         $data->end_time = $request->end_time;
         $data->save();
-        return redirect() -> route('schedule.index')->with('success','Successfully Added Schedule');
+        return redirect()->route('schedule.index')->with('success', 'Successfully Added Schedule');
     }
 
     /**
@@ -99,11 +99,11 @@ class ScheduleController extends Controller
     public function edit($id)
     {
         $data = Schedule::find($id);
-        $users = User::orderBy('name','ASC')
-        ->get()
-        ->pluck('name','id');
+        $users = User::orderBy('name', 'ASC')
+            ->get()
+            ->pluck('name', 'id');
 
-        return view('schedule.edit',compact(['data', 'users']));
+        return view('schedule.edit', compact(['data', 'users']));
     }
 
     /**
@@ -118,13 +118,14 @@ class ScheduleController extends Controller
         //
     }
 
-    public function editUser($id) {
+    public function editUser($id)
+    {
         $data = Schedule::find($id);
 
-        return view('schedule.editUser',compact(['data']));
+        return view('schedule.editUser', compact(['data']));
     }
 
-    public function updateUser(Request $request, Schedule $schedule,$id)
+    public function updateUser(Request $request, Schedule $schedule, $id)
     {
         $data = Schedule::where('id', $id)->firstOrFail();
 
@@ -134,8 +135,8 @@ class ScheduleController extends Controller
         ]);
 
         $data->status = $request->status;
-        if($request->hasFile('upload_bukti')) {
-            $request->file('upload_bukti')->move('bukti/',$request->file('upload_bukti')->getClientOriginalName());
+        if ($request->hasFile('upload_bukti')) {
+            $request->file('upload_bukti')->move('bukti/', $request->file('upload_bukti')->getClientOriginalName());
         }
         $data->upload_bukti = $request->file('upload_bukti')->getClientOriginalName();
         $data->update();
@@ -155,6 +156,6 @@ class ScheduleController extends Controller
         $data = Schedule::find($id);
         $data->delete();
 
-        return redirect()->route('schedule.index')->with('success','Successfuly Delete Schedule');
+        return redirect()->route('schedule.index')->with('success', 'Successfuly Delete Schedule');
     }
 }

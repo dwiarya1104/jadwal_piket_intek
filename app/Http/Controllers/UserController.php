@@ -16,8 +16,8 @@ class UserController extends Controller
     public function index()
     {
         $data = User::all();
-        return view('users.index',['data'=>$data]);
-}
+        return view('users.index', ['data' => $data]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -37,7 +37,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             "name" => 'required|string',
             "username" => 'required|string',
             "email" => 'required|string|unique:users,email',
@@ -48,10 +48,10 @@ class UserController extends Controller
         $data->name = $request->name;
         $data->username = $request->username;
         $data->email = $request->email;
-        $data->password = Hash::make ($request->password);
+        $data->password = Hash::make($request->password);
         $data->save();
 
-        return redirect() -> route('users.index')->with('success','Successfully Added Data');
+        return redirect()->route('users.index')->with('success', 'Successfully Added Data');
     }
 
     /**
@@ -89,13 +89,13 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $data = User::findOrFail($id);
-    $data->name = $request->name;
-    $data->username = $request->username;
-    $data->email = $request->email;
+        $data->name = $request->name;
+        $data->username = $request->username;
+        $data->email = $request->email;
 
-    $data->save();
+        $data->save();
 
-    return redirect() -> route('users.index')->with('success', 'Successfully Updated Data');
+        return redirect()->route('users.index')->with('success', 'Successfully Updated Data');
     }
 
     /**
@@ -109,10 +109,11 @@ class UserController extends Controller
         $data = User::find($id);
         $data->delete();
 
-        return redirect('/users')->with('success','Successfuly Delete Data');
+        return redirect('/users')->with('success', 'Successfuly Delete Data');
     }
 
-    public function AuthRouteAPI(Request $request){
+    public function AuthRouteAPI(Request $request)
+    {
         return $request->user();
-     }
+    }
 }

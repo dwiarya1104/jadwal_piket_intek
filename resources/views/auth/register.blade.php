@@ -12,13 +12,13 @@
     <title>Jadwal Piket | Register</title>
 
     <!-- Custom fonts for this template-->
-    <link href="{{asset('assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet')}}" type="text/css">
+    <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet') }}" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{asset('assets/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -48,7 +48,10 @@
                                     <form class="user" action="{{ route('register') }}" method="POST">
                                         @csrf
                                         <div class="form-group">
-                                            <input id="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Name" autofocus>
+                                            <input id="name" type="text"
+                                                class="form-control form-control-user @error('name') is-invalid @enderror"
+                                                name="name" value="{{ old('name') }}" required autocomplete="name"
+                                                placeholder="Name" autofocus>
                                             @error('name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -56,7 +59,10 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <input id="username" type="text" class="form-control form-control-user @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" placeholder="Username" autofocus>
+                                            <input id="username" type="text"
+                                                class="form-control form-control-user @error('username') is-invalid @enderror"
+                                                name="username" value="{{ old('username') }}" required
+                                                autocomplete="username" placeholder="Username" autofocus>
                                             @error('username')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -64,7 +70,10 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <input id="email" type="email" class="form-control form-control-user @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
+                                            <input id="email" type="email"
+                                                class="form-control form-control-user @error('email') is-invalid @enderror"
+                                                name="email" value="{{ old('email') }}" required autocomplete="email"
+                                                placeholder="Email">
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -72,7 +81,10 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <input id="password" type="password" class="form-control form-control-user @error('password') is-invalid @enderror" name="password" placeholder="Password" required autocomplete="new-password">
+                                            <input id="password" type="password"
+                                                class="form-control form-control-user @error('password') is-invalid @enderror"
+                                                name="password" placeholder="Password" required
+                                                autocomplete="new-password">
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -80,15 +92,19 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <input id="password-confirm" type="password" class="form-control form-control-user" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new-password">
+                                            <input id="password-confirm" type="password"
+                                                class="form-control form-control-user" name="password_confirmation"
+                                                placeholder="Confirm Password" required autocomplete="new-password">
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-lg btn-block user">
                                             {{ __('Sign Up') }}
                                         </button>
                                         <div class="mt-3 text-center justify-content-center align-items-center">
-                                        <div class="h6">Sudah punya akun? <a href="{{route('login')}}" class="ml-1">Sign In</a></div>
-                                        {{-- <a href="{{route('register')}}" class="float-right">Register</a> --}}
-                                    </div>
+                                            <div class="h6">Sudah punya akun? <a
+                                                    href="{{ route('login') }}" class="ml-1">Sign In</a>
+                                            </div>
+                                            {{-- <a href="{{route('register')}}" class="float-right">Register</a> --}}
+                                        </div>
                                 </div>
                             </div>
                         </div>
@@ -102,14 +118,14 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{{asset('assets/vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="{{asset('assets/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+    <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="{{asset('assets/js/sb-admin-2.min.js')}}"></script>
+    <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
 
 </body>
 

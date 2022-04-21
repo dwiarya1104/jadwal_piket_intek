@@ -36,7 +36,7 @@ class RegisterController extends Controller
     protected function redirectTo()
     {
         session()->flash('success', 'Registrasi Berhasil, Silahkan Login!');
-    return 'login';
+        return 'login';
     }
 
     /**
@@ -55,8 +55,8 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-       // $this->guard()->login($user);
-    //this commented to avoid register user being auto logged in
+        // $this->guard()->login($user);
+        //this commented to avoid register user being auto logged in
 
         return $this->registered($request, $user)
             ?: redirect($this->redirectPath());
