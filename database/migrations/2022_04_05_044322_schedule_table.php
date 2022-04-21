@@ -19,7 +19,7 @@ class ScheduleTable extends Migration
             $table->string('task_description');
             $table->text('start_time')->nullable();
             $table->text('end_time')->nullable();
-            $table->enum('status', ['Completed', 'Incompleted', 'On Progress'])->default('Incompleted');
+            $table->enum('status', ['Completed', 'Incompleted', 'On Progress'])->default('On Progress');
             $table->string('upload_bukti')->nullable();
             $table->timestamps();
 
