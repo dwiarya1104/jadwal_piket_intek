@@ -70,6 +70,8 @@ Route::group(['prefix' => 'schedule'], function(){
     Route::get('/', [ScheduleController::class, 'index'])->name('schedule.index');
     Route::get('/addSchedule', [ScheduleController::class, 'create'])->name('schedule.create');
     Route::get('/{id}/editSchedule', [ScheduleController::class, 'edit'])->name('schedule.edit');
+    Route::get('/{id}/editScheduleUser', [ScheduleController::class, 'editUser'])->name('schedule.editUser');
+    Route::put('/{id}/updateScheduleUser', [ScheduleController::class, 'updateUser'])->name('schedule.updateUser');
     Route::post('/storeSchedule', [ScheduleController::class, 'store'])->name('schedule.store');
     Route::get('/deleteSchedule/{id}', [ScheduleController::class, 'destroy'])->name('schedule.delete');
 
