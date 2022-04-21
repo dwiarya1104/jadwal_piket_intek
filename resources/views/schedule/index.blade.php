@@ -62,13 +62,16 @@
                                             <td>
                                                 @if ($schedule['status'] == 'On Progress')
                                                     <a href="{{ route('schedule.editUser', $schedule->id) }}"
-                                                        class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+                                                        class="btn btn-warning btn-sm"><i class="fas fa-edit"
+                                                            title="Edit"></i></a>
                                                 @elseif($schedule['status'] == 'Incompleted')
                                                     <i class="fas fa-times"
-                                                        style="font-size: 30px; color:#e74a3b; align-items:center"></i>
+                                                        style="font-size: 30px; color:#e74a3b; align-items:center"
+                                                        title="Incompleted"></i>
                                                 @elseif($schedule['status'] == 'Completed')
                                                     <i class="fas fa-check"
-                                                        style="font-size: 30px; color:#1cc88a; align-items:center"></i>
+                                                        style="font-size: 30px; color:#1cc88a; align-items:center"
+                                                        title="Completed"></i>
                                                 @endif
 
                                                 @hasrole('admin')
