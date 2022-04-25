@@ -70,11 +70,11 @@ public function apiLogin(Request $request)
         ]);
 
         if( Auth::attempt(['email'=>$request->email, 'password'=>$request->password]) ) {
-            $cek = User::where('email', $request->email)->first();
+            $user = User::where('email', $request->email)->first();
             $data = array(
-                'id' => $cek->id,
-                'name' => $cek->name,
-                'email' => $cek->email,
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
             );
             return response()->json(['success' => 200,'message'=> 'Login Successfuly', 'data' => $data,]);
         }
