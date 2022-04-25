@@ -115,7 +115,24 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = Schedule::where('id', $id)->firstOrFail();
+
+        $request->validate([
+            "task_title" => 'required',
+            "task_description" => 'required',
+            "user_id" => 'required',
+            "start_time" => 'required',
+            "end_time" => 'required',
+        ]);
+
+        $data->task_title = $request->task_title;
+        $data->task_description = $request->task_description;
+        $data->user_id = $request->user_id;
+        $data->start_time = $request->start_time;
+        $data->end_time = $request->end_time;
+        $data->update();
+
+        return redirect()->route('schedule.index')->with('success', 'Successfully Updated Schedule');
     }
 
     public function editUser($id)
