@@ -31,6 +31,11 @@ class ScheduleController extends Controller
         return view('schedule.index', compact(['users', 'data', 'dataadmin']));
     }
 
+    public function apiSchedule() {
+        $data = Schedule::get();
+        return $data;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -42,7 +47,7 @@ class ScheduleController extends Controller
             ->get()
             ->pluck('name', 'id');
 
-        $roleUser = User::role('user')->pluck('name');
+        // $roleUser = User::role('user')->pluck('name');
         $data = Schedule::all();
         // dd($data);
         return view('schedule.create', compact(['users', 'data','roleUser']));
