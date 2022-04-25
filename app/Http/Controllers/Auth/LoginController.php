@@ -9,6 +9,9 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
+use App\User;
+use Hash;
+
 
 class LoginController extends Controller
 {
@@ -59,4 +62,21 @@ class LoginController extends Controller
     }
     return redirect()->route('login');
 }
+public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required'
+        ]);
+
+        if( Auth::attempt(['email'=>$request->email, 'password'=>$request->password]) ) {
+            $cek = User::where('email', $request->email)->first();
+            $data = array(
+                'id' => $cek->id,
+                'name' => $cek->name,
+                'email' => $cek->email,
+            );
+            return response()->json(['success' => 200, 'data' => $data, 'message'=> 'Login Successfuly']);
+        }
+        }
 }
