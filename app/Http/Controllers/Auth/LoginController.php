@@ -76,7 +76,7 @@ public function apiLogin(Request $request)
                 'name' => $cek->name,
                 'email' => $cek->email,
             );
-            return response()->json(['success' => 200, 'data' => $data, 'message'=> 'Login Successfuly']);
+            return response()->json(['success' => 200,'message'=> 'Login Successfuly', 'data' => $data,]);
         }
         }
 }
