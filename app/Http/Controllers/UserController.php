@@ -50,6 +50,7 @@ class UserController extends Controller
         $data->email = $request->email;
         $data->password = Hash::make($request->password);
         $data->save();
+        $data->assignRole('user');
 
         return redirect()->route('users.index')->with('success', 'Successfully Added Data');
     }
