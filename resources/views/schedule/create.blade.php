@@ -28,7 +28,7 @@
 
                     <label for="#" class="font-weight-bold h6">AssignTo</label>
                     <div class="input-group">
-                        {!! Form::select('user_id', $roleUser, null, ['class' => 'form-control select', 'placeholder' => '-- Choose Office Boys --', 'id' => 'user_id', 'required']) !!}
+                        {!! Form::select('user_id', $users, null, ['class' => 'form-control select', 'placeholder' => '-- Choose Office Boys --', 'id' => 'user_id', 'required']) !!}
                     </div>
                     <div class="form-group">
                         <label for="#" class="font-weight-bold h6 mt-3">Start Time</label>
