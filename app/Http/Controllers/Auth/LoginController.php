@@ -62,7 +62,7 @@ class LoginController extends Controller
     }
     return redirect()->route('login');
 }
-public function login(Request $request)
+public function apiLogin(Request $request)
     {
         $request->validate([
             'email' => 'required|email|exists:users,email',
