@@ -42,9 +42,10 @@ class ScheduleController extends Controller
             ->get()
             ->pluck('name', 'id');
 
+        $roleUser = User::role('user')->pluck('name');
         $data = Schedule::all();
         // dd($data);
-        return view('schedule.create', compact(['users', 'data']));
+        return view('schedule.create', compact(['users', 'data','roleUser']));
     }
 
     /**
