@@ -24,28 +24,11 @@ Route::get('/login', function () {
 });
 Route::get('/', 'HomeController@index');
 
-// Route::get('/home', 'DashboardController@index');
-
-// Route::get('/dashboard', function() {
-//     return view('dashboard');
-// })->middleware('role:admin')->name('admin.page');
-
-// Route::get('user-page', function() {
-//     return 'Halaman untuk User';
-// })->middleware('role:user')->name('user.page');
-// Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('role:admin')->name('dashboard');
 Route::get('/schedule', [ScheduleController::class, 'index'])->middleware('role:user')->name('schedule');
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// });
 
 Auth::routes();
 Route::group(['middleware' => 'role:admin'], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-// Route::get('/home', 'DashboardController@index');
-
-    // Route::get('/schedule', [ScheduleController::class, 'index'])->name('schedule.index');
     Route::group(['prefix' => 'users'], function(){
         Route::get('/', [UserController::class, 'index'])->name('users.index');
         Route::get('/addOfficeBoy',[UserController::class, 'create'])->name('users.create');
@@ -55,16 +38,11 @@ Route::group(['middleware' => 'role:admin'], function () {
         Route::get('/delete/{id}', [UserController::class, 'destroy'])->name('users.delete');
         Route::put('/update/{id}', [UserController::class, 'update'])->name('users.update');
     });
-
-    //add more Routes here
 });
 Route::group(['middleware' => 'role:user'], function () {
     Route::get('/schedule', [ScheduleController::class, 'index'])->name('schedule.index');
-// Route::get('/home', 'ScheduleController@index');
 
 });
-
-
 
 Route::group(['prefix' => 'schedule'], function(){
     Route::get('/', [ScheduleController::class, 'index'])->name('schedule.index');
@@ -74,7 +52,5 @@ Route::group(['prefix' => 'schedule'], function(){
     Route::put('/{id}/updateScheduleUser', [ScheduleController::class, 'updateUser'])->name('schedule.updateUser');
     Route::post('/storeSchedule', [ScheduleController::class, 'store'])->name('schedule.store');
     Route::get('/deleteSchedule/{id}', [ScheduleController::class, 'destroy'])->name('schedule.delete');
-
-    // Route::get('/create',[UseController::class, 'create']);
-
+    Route::put('/updateSchedule/{id}', [ScheduleController::class, 'update'])->name('schedule.update');
 });
