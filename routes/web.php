@@ -30,7 +30,7 @@ Auth::routes();
 Route::group(['middleware' => 'role:admin'], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::group(['prefix' => 'users'], function(){
-        Route::get('/', [UserController::class, 'index'])->name('users.index');
+        // Route::get('/', [UserController::class, 'index'])->name('users.index');
         Route::get('/addOfficeBoy',[UserController::class, 'create'])->name('users.create');
         Route::post('/storeUserOfficeBoy', [UserController::class, 'store'])->name('users.store');
         // Route::get('/showOfficeBoy/{id}', [UserController::class, 'show'])->name('users.show');
@@ -43,9 +43,14 @@ Route::group(['middleware' => 'role:user'], function () {
     Route::get('/schedule', [ScheduleController::class, 'index'])->name('schedule.index');
 
 });
+Route::group(['middleware' => ['auth']], function() {
+ Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+ Route::get('/schedule', [ScheduleController::class, 'index'])->name('schedule.index');
+ Route::get('/users', [UserController::class, 'index'])->name('users.index');
+ });
 
 Route::group(['prefix' => 'schedule'], function(){
-    Route::get('/', [ScheduleController::class, 'index'])->name('schedule.index');
+    // Route::get('/', [ScheduleController::class, 'index'])->name('schedule.index');
     Route::get('/addSchedule', [ScheduleController::class, 'create'])->name('schedule.create');
     Route::get('/{id}/editSchedule', [ScheduleController::class, 'edit'])->name('schedule.edit');
     Route::get('/{id}/editScheduleUser', [ScheduleController::class, 'editUser'])->name('schedule.editUser');

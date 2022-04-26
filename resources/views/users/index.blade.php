@@ -25,6 +25,7 @@
                                     <th>Name</th>
                                     <th>Username</th>
                                     <th>Email</th>
+                                    <th>Role</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -38,6 +39,7 @@
                                         <td>{{ $dataob->name }}</td>
                                         <td>{{ $dataob->username }}</td>
                                         <td>{{ $dataob->email }}</td>
+                                        <td>{{ $dataob->roles->pluck('name')->implode('') }}</td>
                                         <td>
                                             <a href="{{ route('users.edit', $dataob->id) }}"
                                                 class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
