@@ -74,9 +74,12 @@ public function apiLogin(Request $request)
             $data = array(
                 'id' => $user->id,
                 'name' => $user->name,
+                'username' => $user->username,
                 'email' => $user->email,
             );
             return response()->json(['success' => 200,'message'=> 'Login Successfuly', 'data' => $data,]);
+        } else {
+            return response()->json(['error' => 401, 'message'=> 'Login Failed']);
         }
         }
 }
