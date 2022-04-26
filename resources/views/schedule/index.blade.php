@@ -139,8 +139,9 @@
                                     <th> Task Title </th>
                                     <th> Description </th>
                                     <th> AssignTo </th>
-                                    <th> Start Time </th>
-                                    <th> End Time </th>
+                                    <th> Tanggal </th>
+                                    {{-- <th> Start Time </th>
+                                    <th> End Time </th> --}}
                                     <th> Status </th>
                                     <th> Bukti </th>
                                     <th> Action </th>
@@ -157,8 +158,9 @@
                                             <td>{{ $schedule->task_title }}</td>
                                             <td>{{ $schedule->task_description }}</td>
                                             <td>{{ $schedule->user->name }}</td>
-                                            <td>{{ $schedule->start_time }}</td>
-                                            <td>{{ $schedule->end_time }}</td>
+                                            <td>{{ $schedule->tanggal }}</td>
+                                            {{-- <td>{{ $schedule->start_time }}</td>
+                                            <td>{{ $schedule->end_time }}</td> --}}
                                             <td>
                                                 @if ($schedule['status'] == 'On Progress')
                                                     <span class='badge badge-warning'>{{ $schedule->status }}</span>
@@ -202,8 +204,9 @@
                                             <td>{{ $schedule->task_title }}</td>
                                             <td>{{ $schedule->task_description }}</td>
                                             <td>{{ $schedule->user->name }}</td>
-                                            <td>{{ $schedule->start_time }}</td>
-                                            <td>{{ $schedule->end_time }}</td>
+                                            <td>{{ $schedule->tanggal }}</td>
+                                            {{-- <td>{{ $schedule->start_time }}</td>
+                                            <td>{{ $schedule->end_time }}</td> --}}
                                             <td>
                                                 @if ($schedule['status'] == 'On Progress')
                                                     <span class='badge badge-warning'>{{ $schedule->status }}</span>

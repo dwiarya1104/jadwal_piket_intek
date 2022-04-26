@@ -12,8 +12,7 @@ class Schedule extends Model
         'task_title',
         'task_description',
         'user_id',
-        'start_time',
-        'end_time',
+        'tanggal',
         'status',
         'upload_bukti'
     ];

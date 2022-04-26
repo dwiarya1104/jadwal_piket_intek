@@ -17,12 +17,10 @@ class ScheduleTable extends Migration
             $table->increments('id');
             $table->string('task_title');
             $table->string('task_description');
-            $table->text('start_time')->nullable();
-            $table->text('end_time')->nullable();
+            $table->date('tanggal');
             $table->enum('status', ['Completed', 'Incompleted', 'On Progress'])->default('On Progress');
             $table->string('upload_bukti')->nullable();
             $table->timestamps();
-
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

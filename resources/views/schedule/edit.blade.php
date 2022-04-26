@@ -33,6 +33,11 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="#" class="font-weight-bold h6 mt-3">Tanggal</label>
+                        <input type="date" class="form-control" name="tanggal" id="tanggal" placeholder="Start Time">
+                    </div>
+
+                    {{-- <div class="form-group">
                         <label for="#" class="font-weight-bold h6 mt-3">Start Time</label>
                         <input type="datetime-local" class="form-control" name="start_time" id="start_time"
                             placeholder="Start Time">
@@ -42,7 +47,7 @@
                         <label for="end_time" class="font-weight-bold h6">End Time</label>
                         <input type="datetime-local" class="form-control" name="end_time" id="end_time"
                             placeholder="End Time">
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary bt-sm mt-4">Add</button>
                         <a href="#" type="submit" class="btn btn-primary bt-sm">Cancel</a>

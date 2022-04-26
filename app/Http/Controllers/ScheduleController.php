@@ -32,12 +32,12 @@ class ScheduleController extends Controller
     }
 
     public function apiSchedule() {
-        $data = Schedule::get();
-        return $data;
+        $data = Schedule::all();
+        return response()->json($data, 200, [], JSON_UNESCAPED_UNICODE);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creatinga a new resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -70,8 +70,9 @@ class ScheduleController extends Controller
             "task_title" => 'required',
             "task_description" => 'required',
             "user_id" => 'required',
-            "start_time" => 'required',
-            "end_time" => 'required',
+            "tanggal" => 'required',
+            // "start_time" => 'required',
+            // "end_time" => 'required',
         ]);
 
         $data = new Schedule();
@@ -79,8 +80,9 @@ class ScheduleController extends Controller
         $data->task_title = $request->task_title;
         $data->task_description = $request->task_description;
         $data->user_id = $request->user_id;
-        $data->start_time = $request->start_time;
-        $data->end_time = $request->end_time;
+        $data->tanggal = $request->tanggal;
+        // $data->start_time = $request->start_time;
+        // $data->end_time = $request->end_time;
         $data->save();
         return redirect()->route('schedule.index')->with('success', 'Successfully Added Schedule');
     }
@@ -134,8 +136,9 @@ class ScheduleController extends Controller
         $data->task_title = $request->task_title;
         $data->task_description = $request->task_description;
         $data->user_id = $request->user_id;
-        $data->start_time = $request->start_time;
-        $data->end_time = $request->end_time;
+        $data->tanggal = $request->tanggal;
+        // $data->start_time = $request->start_time;
+        // $data->end_time = $request->end_time;
         $data->update();
 
         return redirect()->route('schedule.index')->with('success', 'Successfully Updated Schedule');
