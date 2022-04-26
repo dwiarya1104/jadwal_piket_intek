@@ -129,8 +129,9 @@ class ScheduleController extends Controller
             "task_title" => 'required',
             "task_description" => 'required',
             "user_id" => 'required',
-            "start_time" => 'required',
-            "end_time" => 'required',
+            "tanggal" => 'required',
+            // "start_time" => 'required',
+            // "end_time" => 'required',
         ]);
 
         $data->task_title = $request->task_title;
