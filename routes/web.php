@@ -31,9 +31,7 @@ Route::group(['middleware' => 'role:admin'], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::group(['prefix' => 'users'], function(){
         // Route::get('/', [UserController::class, 'index'])->name('users.index');
-        Route::get('/addOfficeBoy',[UserController::class, 'create'])->name('users.create');
         Route::post('/storeUserOfficeBoy', [UserController::class, 'store'])->name('users.store');
-        // Route::get('/showOfficeBoy/{id}', [UserController::class, 'show'])->name('users.show');
         Route::get('/{id}/editOfficeBoy', [UserController::class, 'edit'])->name('users.edit');
         Route::get('/delete/{id}', [UserController::class, 'destroy'])->name('users.delete');
         Route::put('/update/{id}', [UserController::class, 'update'])->name('users.update');

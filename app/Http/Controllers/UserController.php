@@ -43,8 +43,9 @@ class UserController extends Controller
             "email" => 'required|string|unique:users,email',
             "password" => 'required|max:25'
         ]);
-
+        // dd($request()->all());
         $data = new User();
+        // dd($data);
         $data->name = $request->name;
         $data->username = $request->username;
         $data->email = $request->email;
