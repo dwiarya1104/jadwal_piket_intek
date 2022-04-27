@@ -144,6 +144,9 @@
                                     <th> End Time </th> --}}
                                     <th> Status </th>
                                     <th> Bukti </th>
+                                    @hasrole('admin')
+                                        <th> Update At </th>
+                                    @endhasrole
                                     <th> Action </th>
                                 </tr>
                             </thead>
@@ -217,7 +220,9 @@
                                                 @endif
                                             </td>
                                             <td><img id="myImg" src="{{ asset('bukti/' . $schedule->upload_bukti) }}" alt=""
-                                                    style="width: 50px;"></td>
+                                                    style="width: 50px;">
+                                            </td>
+                                            <td>{{ $schedule->updated_at }}</td>
                                             <td>
                                                 <a href="{{ route('schedule.edit', $schedule->id) }}"
                                                     class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
