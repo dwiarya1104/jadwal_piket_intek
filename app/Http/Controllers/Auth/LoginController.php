@@ -56,9 +56,9 @@ class LoginController extends Controller
     public function authenticated(Request $request, $user)
 {
     if ($user->hasRole('admin')) {
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->with('toast_success', 'Welcome,' . '&nbsp;' .$user->username);
     }elseif ($user->hasRole('user')) {
-        return redirect()->route('schedule.index');
+        return redirect()->route('schedule.index')->with('toast_success', 'Welcome,' . '&nbsp;' .$user->username);
     }
     return redirect()->route('login');
 }

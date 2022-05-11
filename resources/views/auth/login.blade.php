@@ -46,11 +46,6 @@
                                         </div>
                                     </div>
                                     @if ($message = Session::get('success'))
-                                        <div class="alert alert-success alert-dismissible fade show" role="alert    ">
-                                            <button type="button" class="close" data-dismiss="alert"
-                                                aria-label="close">×</button>
-                                            <strong style="font-size: 15px;">{{ $message }}</strong>
-                                        </div>
                                     @endif
                                     <form class="user" action="{{ route('login') }}" method="POST">
                                         @csrf
@@ -112,7 +107,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
-
+    @include('sweetalert::alert')
 </body>
 
 </html>

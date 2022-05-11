@@ -35,7 +35,7 @@ class RegisterController extends Controller
 
     protected function redirectTo()
     {
-        session()->flash('success', 'Registrasi Berhasil, Silahkan Login!');
+        session()->flash('toast_success', 'Registrasi Berhasil, Silahkan Login!');
         return 'login';
     }
 

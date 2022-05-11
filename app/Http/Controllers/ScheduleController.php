@@ -6,6 +6,9 @@ use App\Schedule;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use RealRashid\SweetAlert\Facades\Alert;
+use Carbon\Carbon;
+use DB;
 
 
 class ScheduleController extends Controller
@@ -19,21 +22,28 @@ class ScheduleController extends Controller
     {
         // get data users for dropwdown
         $users = User::orderBy('name', 'ASC')
+            ->role('user')
             ->get()
             ->pluck('name', 'id');
         // get data users for dropwdown
 
         // munclin data berdasarkan user yang login
         $user = Auth::user();
-        $data = Schedule::where('user_id', $user->id)->get();
+        $data = Schedule::select("*")->where('user_id', $user->id)->whereDate('tanggal', Carbon::today())->get();
         $dataadmin = Schedule::all();
 
         return view('schedule.index', compact(['users', 'data', 'dataadmin']));
     }
 
-    public function apiSchedule() {
+    public function apiSchedule(Schedule $data) {
         $data = Schedule::all();
-        return response()->json($data, 200, [], JSON_UNESCAPED_UNICODE);
+        return response()->json($data, 200, [], JSON_UNESCAPED_SLASHES);
+        // $data = Schedule::array([
+        //     'task_title' => $this->task_title,
+        //     'status' => $this->status,
+        // ]);
+
+        return response()->json($data,200);
     }
 
     /**
@@ -43,14 +53,7 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        $users = User::orderBy('name', 'ASC')
-            ->get()
-            ->pluck('name', 'id');
 
-        // $roleUser = User::role('user')->pluck('name');
-        $data = Schedule::all();
-        // dd($data);
-        return view('schedule.create', compact(['users', 'data','roleUser']));
     }
 
     /**
@@ -71,8 +74,6 @@ class ScheduleController extends Controller
             "task_description" => 'required',
             "user_id" => 'required',
             "tanggal" => 'required',
-            // "start_time" => 'required',
-            // "end_time" => 'required',
         ]);
 
         $data = new Schedule();
@@ -81,10 +82,8 @@ class ScheduleController extends Controller
         $data->task_description = $request->task_description;
         $data->user_id = $request->user_id;
         $data->tanggal = $request->tanggal;
-        // $data->start_time = $request->start_time;
-        // $data->end_time = $request->end_time;
         $data->save();
-        return redirect()->route('schedule.index')->with('success', 'Successfully Added Schedule');
+        return redirect()->route('schedule.index')->with('success', 'Successfully Added Schedule');;
     }
 
     /**
@@ -108,12 +107,12 @@ class ScheduleController extends Controller
     {
         $data = Schedule::find($id);
         $users = User::orderBy('name', 'ASC')
+            ->role('user')
             ->get()
             ->pluck('name', 'id');
 
         return view('schedule.edit', compact(['data', 'users']));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -141,7 +140,6 @@ class ScheduleController extends Controller
         // $data->start_time = $request->start_time;
         // $data->end_time = $request->end_time;
         $data->update();
-
         return redirect()->route('schedule.index')->with('success', 'Successfully Updated Schedule');
     }
 
@@ -149,26 +147,30 @@ class ScheduleController extends Controller
     {
         $data = Schedule::find($id);
 
-        return view('schedule.editUser', compact(['data']));
+        return view('schedule.editUser',compact(['data']));
     }
 
     public function updateUser(Request $request, Schedule $schedule, $id)
     {
         $data = Schedule::where('id', $id)->firstOrFail();
-
+        // dd($request);
         $request->validate([
             "status" => 'required',
             "upload_bukti" => 'file|max:3072',
         ]);
 
         $data->status = $request->status;
+        $img = $request->file('upload_bukti');
+        $filename = $img->getClientOriginalName();
+
         if ($request->hasFile('upload_bukti')) {
-            $request->file('upload_bukti')->move('bukti/', $request->file('upload_bukti')->getClientOriginalName());
+            $request->file('upload_bukti')->storeAs('/bukti',$filename);
         }
+
         $data->upload_bukti = $request->file('upload_bukti')->getClientOriginalName();
         $data->update();
 
-        return redirect()->route('schedule.index')->with('success', 'Successfully Updated Schedule');
+        return redirect()->route('schedule.index')->with('success', 'Successfully Updated Schedule');;
     }
 
 
@@ -183,6 +185,6 @@ class ScheduleController extends Controller
         $data = Schedule::find($id);
         $data->delete();
 
-        return redirect()->route('schedule.index')->with('success', 'Successfuly Delete Schedule');
+        return redirect()->route('schedule.index')->with('success', 'Successfully Deleted Schedule');;
     }
 }

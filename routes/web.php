@@ -6,6 +6,7 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DashboardController;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 /*
@@ -33,7 +34,7 @@ Route::group(['middleware' => 'role:admin'], function () {
         // Route::get('/', [UserController::class, 'index'])->name('users.index');
         Route::post('/storeUserOfficeBoy', [UserController::class, 'store'])->name('users.store');
         Route::get('/{id}/editOfficeBoy', [UserController::class, 'edit'])->name('users.edit');
-        Route::get('/delete/{id}', [UserController::class, 'destroy'])->name('users.delete');
+        Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('users.delete');
         Route::put('/update/{id}', [UserController::class, 'update'])->name('users.update');
     });
 });
@@ -49,11 +50,10 @@ Route::group(['middleware' => ['auth']], function() {
 
 Route::group(['prefix' => 'schedule'], function(){
     // Route::get('/', [ScheduleController::class, 'index'])->name('schedule.index');
-    Route::get('/addSchedule', [ScheduleController::class, 'create'])->name('schedule.create');
     Route::get('/{id}/editSchedule', [ScheduleController::class, 'edit'])->name('schedule.edit');
     Route::get('/{id}/editScheduleUser', [ScheduleController::class, 'editUser'])->name('schedule.editUser');
     Route::put('/{id}/updateScheduleUser', [ScheduleController::class, 'updateUser'])->name('schedule.updateUser');
     Route::post('/storeSchedule', [ScheduleController::class, 'store'])->name('schedule.store');
-    Route::get('/deleteSchedule/{id}', [ScheduleController::class, 'destroy'])->name('schedule.delete');
+    Route::delete('/deleteSchedule/{id}', [ScheduleController::class, 'destroy'])->name('schedule.delete');
     Route::put('/updateSchedule/{id}', [ScheduleController::class, 'update'])->name('schedule.update');
 });

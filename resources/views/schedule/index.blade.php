@@ -2,124 +2,218 @@
 
 @section('main')
 
-    <style>
-        #myImg {
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+    {{-- MODAL SHOW --}}
 
-        #myImg:hover {
-            opacity: 0.7;
-        }
+    <!-- Modal -->
+    @foreach ($dataadmin as $da)
+        <div class="modal fade" id="exampleModalCenter{{ $da->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title font-weight-bold" id="exampleModalLongTitle">Detail Schedule</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @if ($da->upload_bukti)
+                            <img src="{{ asset('storage/bukti/' . $da->upload_bukti) }}" alt="" width="70%"
+                                style="display:flex;margin-left: auto; margin-right:auto">
+                        @else
+                            <h4 class="text-center my-5">No Image Yet</h4>
+                        @endif
+                        <hr>
+                        <div class="container">
+                            <div class="row justify-content-md-center">
+                                <div class="col col-lg">
+                                    Task Title
+                                </div>
+                                <div class="col-md-auto">
+                                    :
+                                </div>
+                                <div class="col col-lg">
+                                    <p>{{ $da->task_title }}</p>
+                                </div>
+                            </div>
 
-        /* The Modal (background) */
-        .modal {
-            display: none;
-            /* Hidden by default */
-            position: fixed;
-            /* Stay in place */
-            z-index: 1;
-            /* Sit on top */
-            padding-top: 100px;
-            /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%;
-            /* Full width */
-            height: 100%;
-            /* Full height */
-            overflow: auto;
-            /* Enable scroll if needed */
-            background-color: rgb(0, 0, 0);
-            /* Fallback color */
-            background-color: rgba(0, 0, 0, 0.9);
-            /* Black w/ opacity */
-        }
+                            <div class="row justify-content-md-center">
+                                <div class="col col-lg">
+                                    Description
+                                </div>
+                                <div class="col-md-auto">
+                                    :
+                                </div>
+                                <div class="col col-lg">
+                                    <p>{{ $da->task_description }}</p>
+                                </div>
+                            </div>
 
-        /* Modal Content (Image) */
-        .modal-content {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 700px;
-        }
+                            <div class="row justify-content-md-center">
+                                <div class="col col-lg">
+                                    AssigntTo
+                                </div>
+                                <div class="col-md-auto">
+                                    :
+                                </div>
+                                <div class="col col-lg">
+                                    <p>{{ $da->user->name }}</p>
+                                </div>
+                            </div>
 
-        /* Caption of Modal Image (Image Text) - Same Width as the Image */
-        #caption {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 700px;
-            text-align: center;
-            color: #ccc;
-            padding: 10px 0;
-            height: 150px;
-        }
+                            <div class="row justify-content-md-center">
+                                <div class="col col-lg">
+                                    Tanggal
+                                </div>
+                                <div class="col-md-auto">
+                                    :
+                                </div>
+                                <div class="col col-lg">
+                                    <p>{{ $da->tanggal }}</p>
+                                </div>
+                            </div>
 
-        /* Add Animation - Zoom in the Modal */
-        .modal-content,
-        #caption {
-            animation-name: zoom;
-            animation-duration: 0.6s;
-        }
+                            <div class="row justify-content-md-center">
+                                <div class="col col-lg">
+                                    Status
+                                </div>
+                                <div class="col-md-auto">
+                                    :
+                                </div>
+                                <div class="col col-lg">
+                                    @if ($da['status'] == 'On Progress')
+                                        <p class='badge badge-warning'>
+                                            {{ $da->status }}
+                                        </p>
+                                    @elseif ($da['status'] == 'Completed')
+                                        <p class='badge badge-success'>
+                                            {{ $da->status }}
+                                        </p>
+                                    @elseif ($da['status'] == 'Incompleted')
+                                        <p class='badge badge-danger'>
+                                            {{ $da->status }}
+                                        </p>
+                                    @endif
+                                </div>
+                            </div>
 
-        @keyframes zoom {
-            from {
-                transform: scale(0)
-            }
+                            <div class="row justify-content-md-center">
+                                <div class="col col-lg">
+                                    CreatedAt
+                                </div>
+                                <div class="col-md-auto">
+                                    :
+                                </div>
+                                <div class="col col-lg">
+                                    <p>{{ $da->created_at }}</p>
+                                </div>
+                            </div>
 
-            to {
-                transform: scale(1)
-            }
-        }
+                            <div class="row justify-content-md-center">
+                                <div class="col col-lg">
+                                    UpdatedAt
+                                </div>
+                                <div class="col-md-auto">
+                                    :
+                                </div>
+                                <div class="col col-lg">
+                                    <p>{{ $da->updated_at }}</p>
+                                </div>
+                            </div>
 
-        /* The Close Button */
-        .close {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
 
-        .close:hover,
-        .close:focus {
-            color: #bbb;
-            text-decoration: none;
-            cursor: pointer;
-        }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 
-        /* 100% Image Width on Smaller Screens */
-        @media only screen and (max-width: 700px) {
-            .modal-content {
-                width: 100%;
-            }
-        }
+    {{-- MODAL DELETE --}}
+    @foreach ($dataadmin as $del)
+        <div class="modal fade" id="modalDelete{{ $del->id }}" tabindex="-1" aria-labelledby="modalHapusBarang"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <i class="fas fa-exclamation-circle mb-2"
+                            style="color: #e74a3b; font-size:120px; justify-content:center; display:flex"></i>
+                        <h5 class="text-center">Are you sure you want to delete this Schedule?</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <form action="{{ route('schedule.delete', $del->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Yes, Delete it</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 
-    </style>
+    <!-- Modal ADD SCHEDULE -->
+    {{-- @include('sweetalert::alert') --}}
+    <div class="modal fade" id="addSchedule" tabindex="-1" role="dialog" aria-labelledby="addScheduleLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-bold h5" id="addScheduleLabel">Add Schedule</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('schedule.store') }}" id="formAdd" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="#" class="font-weight-bold h6">Task Title</label>
+                            <input type="text" class="form-control @error('task_title') is-invalid @enderror"
+                                id="task_title" name="task_title" id="task_title" placeholder="Task Title" required>
+                            @error('task_title')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
 
-    <div id="myModal" class="modal">
+                        <div class="form-group">
+                            <label for="#" class="font-weight-bold h6">Description</label>
+                            <input type="text" class="form-control  @error('task_description') is-invalid @enderror"
+                                name="task_description" id="task_description" placeholder="Description" required>
+                            @error('task_description')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
 
-        <!-- The Close Button -->
-        <span class="close">&times;</span>
+                        <label for="#" class="font-weight-bold h6">AssignTo</label>
+                        <div class="input-group">
+                            {!! Form::select('user_id', $users, null, ['class' => 'form-control select', 'placeholder' => '-- Choose Office Boys --', 'id' => 'user_id', 'required']) !!}
+                        </div>
 
-        <!-- Modal Content (The Image) -->
-        <img class="modal-content" id="img01">
-
-        <!-- Modal Caption (Image Text) -->
-        <div id="caption"></div>
+                        <div class="form-group">
+                            <label for="#" class="font-weight-bold h6 mt-3">Tanggal</label>
+                            <input type="date" class="form-control" id="tanggal" name="tanggal" id="tanggal"
+                                placeholder="Start Time" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+    {{-- END MODAL --}}
 
     <section>
         <div class="container-fluid">
             @if ($message = Session::get('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert    ">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="close">×</button>
-                    <strong>{{ $message }}</strong>
-                </div>
             @endif
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -127,8 +221,12 @@
                 </div>
                 <div class="card-body">
                     @hasrole('admin')
-                        <a href="{{ route('schedule.create') }}" class="btn btn-primary float-right btn-sm mb-3"
-                            data-bs-toggle="modal" data-bs-target="#addSchedule">+ Add Schedule</a>
+                        {{-- <a href="{{ route('schedule.create') }}" class="btn btn-primary float-right btn-sm mb-3"
+                            data-bs-toggle="modal" data-bs-target="#addSchedule">+ Add Schedule</a> --}}
+                        <button type="button" class="btn btn-primary btn-sm float-right mb-3" data-toggle="modal"
+                            data-target="#addSchedule">
+                            <i class="fas fa-plus"></i>Add Schedule
+                        </button>
                     @endhasrole
                     <div class="table-responsive">
                         <table class="table table-striped datatables" style="font-size:13px;" id="dataTable" width="100%"
@@ -173,13 +271,18 @@
                                                     <span class='badge badge-danger'>{{ $schedule->status }}</span>
                                                 @endif
                                             </td>
-                                            <td><img id="myImg" src="{{ asset('bukti/' . $schedule->upload_bukti) }}" alt=""
+                                            {{-- @php
+                                                dd($schedule->id);
+                                            @endphp --}}
+                                            <td><img src="{{ asset('storage/bukti/' . $schedule->upload_bukti) }}" alt=""
                                                     style="width: 50px;"></td>
                                             <td>
                                                 @if ($schedule['status'] == 'On Progress')
-                                                    <a href="{{ route('schedule.editUser', $schedule->id) }}"
-                                                        class="btn btn-warning btn-sm"><i class="fas fa-edit"
-                                                            title="Edit"></i></a>
+                                                    {{-- <a href="{{ route('schedule.editUser', $schedule->id) }}"
+                                                        class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a> --}}
+                                                    <a class="btn btn-success btn-sm"><i class="fas fa-edit"
+                                                            data-toggle="modal"
+                                                            data-target="#modalEditUser{{ $schedule->id }}"></i></a>
                                                 @elseif($schedule['status'] == 'Incompleted')
                                                     <i class="fas fa-times"
                                                         style="font-size: 30px; color:#e74a3b; align-items:center"
@@ -189,12 +292,6 @@
                                                         style="font-size: 30px; color:#1cc88a; align-items:center"
                                                         title="Completed"></i>
                                                 @endif
-
-                                                @hasrole('admin')
-                                                    <a href="#" class="btn btn-danger btn-sm"
-                                                        onclick="return confirm('Are you sure you want to delete this Users?')"><i
-                                                            class="fas fa-trash"></i></a>
-                                                @endhasrole
                                             </td>
                                         </tr>
                                     @endforeach
@@ -219,17 +316,21 @@
                                                     <span class='badge badge-danger'>{{ $schedule->status }}</span>
                                                 @endif
                                             </td>
-                                            <td><img id="myImg" src="{{ asset('bukti/' . $schedule->upload_bukti) }}" alt=""
+                                            <td><img src="{{ asset('storage/bukti/' . $schedule->upload_bukti) }}" alt=""
                                                     style="width: 50px;">
                                             </td>
                                             <td>{{ $schedule->updated_at }}</td>
                                             <td>
-                                                <a href="{{ route('schedule.edit', $schedule->id) }}"
-                                                    class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
-                                                <a href="{{ route('schedule.delete', $schedule->id) }}"
-                                                    class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Are you sure you want to delete this Users?')"><i
-                                                        class="fas fa-trash"></i></a>
+                                                {{-- <a href="{{ route('schedule.edit', $schedule->id) }}"
+                                                    class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a> --}}
+                                                <a class="btn btn-success btn-sm"><i class="fas fa-edit" data-toggle="modal"
+                                                        data-target="#modalUpdateAdmin{{ $schedule->id }}"></i></a>
+
+                                                <a class="btn btn-danger btn-sm"><i class="fas fa-trash" data-toggle="modal"
+                                                        data-target="#modalDelete{{ $schedule->id }}"></i></a>
+                                                <a class="btn btn-primary btn-sm"><i class="fas fa-eye" data-toggle="modal"
+                                                        data-target="#exampleModalCenter{{ $schedule->id }}"></i></a>
+
                                             </td>
                                         </tr>
                                     @endforeach
@@ -243,28 +344,9 @@
         </div>
 
         </div>
+        @include('schedule/editUser')
+        @include('schedule/edit')
 
-        <script type="text/javascript">
-            // Get the modal
-            var modal = document.getElementById("myModal");
-
-            // Get the image and insert it inside the modal - use its "alt" text as a caption
-            var img = document.getElementById("myImg");
-            var modalImg = document.getElementById("img01");
-            var captionText = document.getElementById("caption");
-            img.onclick = function() {
-                modal.style.display = "block";
-                modalImg.src = this.src;
-                captionText.innerHTML = this.alt;
-            }
-
-            // Get the <span> element that closes the modal
-            var span = document.getElementsByClassName("close")[0];
-
-            // When the user clicks on <span> (x), close the modal
-            span.onclick = function() {
-                modal.style.display = "none";
-            }
-        </script>
+        @include('sweetalert::alert')
     </section>
 @endsection
