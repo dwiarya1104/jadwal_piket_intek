@@ -41,7 +41,7 @@ class UserController extends Controller
             "name" => 'required|string',
             "username" => 'required|string',
             "email" => 'required|string|unique:users,email',
-            "password" => 'required|max:25'
+            "password" => 'required|max:40'
         ]);
         // dd($request()->all());
         $data = new User();
@@ -53,7 +53,7 @@ class UserController extends Controller
         $data->save();
         $data->assignRole('user');
 
-        return redirect()->route('users.index')->with('success', 'Successfully Added Data');
+        return redirect()->route('users.index')->with('success', 'Successfully Added User');
     }
 
     /**
