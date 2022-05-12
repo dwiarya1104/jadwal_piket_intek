@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use app\Http\Controllers\Auth\LoginController;
 use app\Http\Controllers\ScheduleController;
+use app\Http\Controllers\ApiController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,4 +22,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('login', 'Auth\LoginController@apiLogin');
 
-Route::get('schedule','ScheduleController@apiSchedule');
+Route::post('schedule','ApiController@schedule');
