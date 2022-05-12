@@ -9,6 +9,7 @@ use Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
 use DB;
+use Storage;
 
 
 class ScheduleController extends Controller
@@ -20,12 +21,10 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        // get data users for dropwdown
         $users = User::orderBy('name', 'ASC')
             ->role('user')
             ->get()
             ->pluck('name', 'id');
-        // get data users for dropwdown
 
         // munclin data berdasarkan user yang login
         $user = Auth::user();
@@ -35,16 +34,6 @@ class ScheduleController extends Controller
         return view('schedule.index', compact(['users', 'data', 'dataadmin']));
     }
 
-    public function apiSchedule(Schedule $data) {
-        $data = Schedule::all();
-        return response()->json($data, 200, [], JSON_UNESCAPED_SLASHES);
-        // $data = Schedule::array([
-        //     'task_title' => $this->task_title,
-        //     'status' => $this->status,
-        // ]);
-
-        return response()->json($data,200);
-    }
 
     /**
      * Show the form for creatinga a new resource.
@@ -153,10 +142,10 @@ class ScheduleController extends Controller
     public function updateUser(Request $request, Schedule $schedule, $id)
     {
         $data = Schedule::where('id', $id)->firstOrFail();
-        // dd($request);
+        // dd($data);
         $request->validate([
             "status" => 'required',
-            "upload_bukti" => 'file|max:3072',
+            "upload_bukti" => 'required|file|max:3072',
         ]);
 
         $data->status = $request->status;
@@ -183,6 +172,9 @@ class ScheduleController extends Controller
     public function destroy($id)
     {
         $data = Schedule::find($id);
+        if($data->upload_bukti){
+            Storage::delete('/bukti/'.$data->upload_bukti);
+        }
         $data->delete();
 
         return redirect()->route('schedule.index')->with('success', 'Successfully Deleted Schedule');;
