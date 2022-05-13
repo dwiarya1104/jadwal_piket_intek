@@ -72,7 +72,7 @@ class ScheduleController extends Controller
         $data->user_id = $request->user_id;
         $data->tanggal = $request->tanggal;
         $data->save();
-        return redirect()->route('schedule.index')->with('success', 'Successfully Added Schedule');;
+        return redirect()->route('schedule.index')->with('success', '<h4>Successfully Added Schedule</h4>');;
     }
 
     /**
@@ -129,7 +129,7 @@ class ScheduleController extends Controller
         // $data->start_time = $request->start_time;
         // $data->end_time = $request->end_time;
         $data->update();
-        return redirect()->route('schedule.index')->with('success', 'Successfully Updated Schedule');
+        return redirect()->route('schedule.index')->with('success', '<h4>Successfully Updated Schedule</h4>');
     }
 
     public function editUser($id)
@@ -159,7 +159,7 @@ class ScheduleController extends Controller
         $data->upload_bukti = $request->file('upload_bukti')->getClientOriginalName();
         $data->update();
 
-        return redirect()->route('schedule.index')->with('success', 'Successfully Updated Schedule');;
+        return redirect()->route('schedule.index')->with('success', '<h4>Successfully Updated Schedule</h4>');;
     }
 
 
@@ -177,6 +177,6 @@ class ScheduleController extends Controller
         }
         $data->delete();
 
-        return redirect()->route('schedule.index')->with('success', 'Successfully Deleted Schedule');;
+        return redirect()->route('schedule.index')->with('success', '<h4>Successfully Deleted Schedule</h4>');;
     }
 }

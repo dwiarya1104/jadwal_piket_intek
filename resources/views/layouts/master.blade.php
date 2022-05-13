@@ -164,14 +164,16 @@
                                 <span
                                     class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->username }}</span>
                                 <img class="img-profile rounded-circle"
-                                    src="{{ asset('assets/img/undraw_profile.svg') }}">
+                                    src="{{ asset('assets/img/undraw_profile_2.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <ul class="dropdown-menu dropdown-menu-right shadow animated--grow-in justify-content-center align-items-center"
                                 aria-labelledby="userDropdown">
                                 <!-- The user image in the menu -->
                                 <li class="user-header align-items-center justify-content-center text-center">
-                                    <img src="{{ asset('assets/img/undraw_profile.svg') }}"
+                                    <i class="fas fa-camera"
+                                        style="display:flex;margin-left:85px;margin-top:55px;position:absolute;cursor: pointer; color:black; "></i>
+                                    <img src="{{ asset('assets/img/undraw_profile_2.svg') }}"
                                         class="img-circle my-3 mx-3" style="width:50px;" alt="User Image">
                                     <h6 class="col">
                                         {{ \Auth::user()->name }}

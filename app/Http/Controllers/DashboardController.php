@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Schedule;
+use Carbon\Carbon;
 class DashboardController extends Controller
 {
     /**
@@ -13,7 +14,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view ('dashboard');
+        $data = Schedule::whereDate('tanggal', Carbon::today())->get();
+        $day = Carbon::today()->format('d-m-Y');
+        return view('dashboard', compact(['data','day']));
     }
 
     /**

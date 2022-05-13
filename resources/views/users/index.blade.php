@@ -137,6 +137,7 @@
         </div>
         </div>
         @include('users/edit')
+        @include('sweetalert::alert')
 
     </section>
 @endsection
