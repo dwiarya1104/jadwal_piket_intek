@@ -103,6 +103,7 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Foto</th>
                                     <th>Name</th>
                                     <th>Username</th>
                                     <th>Email</th>
@@ -117,6 +118,8 @@
                                 @foreach ($data as $d)
                                     <tr>
                                         <td>{{ $serial++ }}</td>
+                                        <td><img src="{{ asset('storage/pp/' . $d->poto) }}" alt="" style="width: 50px;">
+                                        </td>
                                         <td>{{ $d->name }}</td>
                                         <td>{{ $d->username }}</td>
                                         <td>{{ $d->email }}</td>

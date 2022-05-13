@@ -24,6 +24,93 @@
 </head>
 
 <body id="page-top">
+    <div class="modal fade" id="modalEditUser{{ \Auth::user()->id }}" tabindex="-1"
+        aria-labelledby="modalUpdateBarang" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Profile</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!--FORM UPDATE BARANG-->
+                    <form action="{{ route('schedule.updateUser', \Auth::user()->id) }}" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="row">
+                            <div class="col-4">
+                                @if (\Auth::user()->img)
+                                    <img src="{{ asset('storage/bukti/' . \Auth::user()->img) }}" alt="" width="70%"
+                                        style="display:flex;margin-left: auto; margin-right:auto">
+                                @else
+                                    <img class="img-profile rounded-circle center"
+                                        src="{{ asset('storage/pp/' . \Auth::user()->poto) }}">
+                                @endif
+                            </div>
+                            <div class="col-8">
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="#" class="font-weight-bold h6">Name</label>
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                            id="name" name="name" id="email" placeholder="Name"
+                                            value={{ \Auth::user()->name }}>
+                                        @error('name')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="#" class="font-weight-bold h6">Username</label>
+                                        <input type="text" class="form-control" name="username" id="email"
+                                            placeholder="Username" value={{ \Auth::user()->username }}>
+                                    </div>
+                                </div>
+                                <label for="#" class="font-weight-bold h6 mt-3">Choose your profile picture</label>
+                                <div class="form-group">
+                                    <input type="file" class="form-control" name="upload_bukti">
+                                </div>
+                            </div>
+                        </div>
+                        {{-- @if (\Auth::user()->img)
+                            <img src="{{ asset('storage/bukti/' . \Auth::user()->img) }}" alt="" width="70%"
+                                style="display:flex;margin-left: auto; margin-right:auto">
+                        @else
+                            <h4 class="text-center my-5">No Image Yet</h4>
+                        @endif --}}
+                        {{-- <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="#" class="font-weight-bold h6">Name</label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
+                                    name="name" id="email" placeholder="Name" value={{ \Auth::user()->name }}>
+                                @error('name')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="#" class="font-weight-bold h6">Username</label>
+                                <input type="text" class="form-control" name="username" id="email"
+                                    placeholder="Username" value={{ \Auth::user()->username }}>
+                            </div>
+                        </div>
+                        <label for="#" class="font-weight-bold h6 mt-3">Bukti</label>
+                        <div class="form-group">
+                            <input type="file" class="form-control" name="upload_bukti">
+                        </div> --}}
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary bt-sm right">Save Change</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -164,16 +251,14 @@
                                 <span
                                     class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->username }}</span>
                                 <img class="img-profile rounded-circle"
-                                    src="{{ asset('assets/img/undraw_profile_2.svg') }}">
+                                    src="{{ asset('storage/pp/' . \Auth::user()->poto) }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <ul class="dropdown-menu dropdown-menu-right shadow animated--grow-in justify-content-center align-items-center"
                                 aria-labelledby="userDropdown">
                                 <!-- The user image in the menu -->
                                 <li class="user-header align-items-center justify-content-center text-center">
-                                    <i class="fas fa-camera"
-                                        style="display:flex;margin-left:85px;margin-top:55px;position:absolute;cursor: pointer; color:black; "></i>
-                                    <img src="{{ asset('assets/img/undraw_profile_2.svg') }}"
+                                    <img src="{{ asset('storage/pp/' . \Auth::user()->poto) }}"
                                         class="img-circle my-3 mx-3" style="width:50px;" alt="User Image">
                                     <h6 class="col">
                                         {{ \Auth::user()->name }}
@@ -182,9 +267,13 @@
                                     </h6>
                                 </li>
                                 <div class="dropdown-divider mx-1"></div>
-                                <button>
-                                    change profile
-                                </button>
+                                <a class="btn btn-transparent btn-sm" style="font-size" data-toggle="modal"
+                                    data-target="#modalEditUser{{ \Auth::user()->id }}">
+                                    <i class="fas fa-cog"></i>&nbsp;
+                                    {{ __('Edit Profile') }}
+                                </a>
+                                {{-- <input type="file" id="imgupload"> --}}
+                                {{-- <a href="" onclick="$('#imgupload').trigger('click'); return false;" style="text-decoration: none; display:flex; justify-content:center">Change Profile</a> --}}
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     {{-- <div class="pull-left"> --}}
@@ -192,8 +281,9 @@
                                     {{-- </div> --}}
                                     <div class="dropdown-divider mx-1"></div>
                                     <div class="pull-right">
-                                        <a class="btn btn-default btn-flat float-left" style="font-size: 12px; color:#e74a3b"
-                                            href="{{ route('logout') }}" onclick="event.preventDefault();
+                                        <a class="btn btn-default btn-flat float-left"
+                                            style="font-size: 12px; color:#e74a3b" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
                                             <i class="fas fa-sign-out-alt mr-1"></i>{{ __('Logout') }}
                                         </a>
@@ -291,6 +381,11 @@
             </div>
         </div>
 
+        <script type="text/javascript">
+            $("#OpenImgUpload").click(function() {
+                $("#imgupload").click();
+            });
+        </script>
 
         <script type="text/javascript">
             window.onload = function() {
@@ -339,6 +434,7 @@
 
         <!-- Page level custom scripts -->
         <script src="{{ asset('assets/js/demo/datatables-demo.js') }}"></script>
+
 
         {{-- @include('sweetalert::alert') --}}
 

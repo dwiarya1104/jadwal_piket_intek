@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Schedule;
+use App\User;
 use Carbon\Carbon;
 class DashboardController extends Controller
 {
@@ -14,7 +15,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $data = Schedule::whereDate('tanggal', Carbon::today())->get();
+        $data = Schedule::orderBy('updated_at','DESC')->whereDate('tanggal', Carbon::today())->get();
         $day = Carbon::today()->format('d-m-Y');
         return view('dashboard', compact(['data','day']));
     }
@@ -69,9 +70,9 @@ class DashboardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateProfile(Request $request, $id)
     {
-        //
+
     }
 
     /**

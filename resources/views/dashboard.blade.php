@@ -116,34 +116,46 @@
                         </div>
                         <!-- Card Body -->
                         <div class="card-body">
+                            @if (\App\Schedule::count() == 0)
+                                <h5 class="text-center">No Schedule Yet</h5>
+                            @endif
                             @foreach ($data as $da)
+                                {{-- @php
+                                    dd($data);
+                                @endphp --}}
                                 @if ($da->status == 'On Progress')
                                     <div class="row">
-                                        <div class="col">
-                                            <img src="{{ asset('assets/img/undraw_profile_3.svg') }}" width="50px;"
-                                                alt="">
+                                        <div class="col text-center">
+                                            {{-- <img src="{{ asset('storage/pp/' . $da->poto) }} " width="50px;" alt="" /> --}}
+                                            <img src="{{ asset('storage/pp/' . $da->user->poto) }}" alt="" width="50px;">
+                                            <h4 class=" small font-weight-bold text-center">{{ $da->user->name }}
+                                            </h4>
                                         </div>
-                                        <div class="col-9">
-                                            <h4 class="small font-weight-bold" title="username">{{ $da->user->name }}
-                                                <span class="float-right">50%</span>
+                                        <div class="
+                                                col-9">
+                                            <h4 class="small font-weight-bold" title="username">{{ $da->task_title }}
+                                                <span class="float-right"></span>
                                             </h4>
                                             <div class="progress mb-4" title="{{ $da->task_title }}">
                                                 <div class="progress-bar bg-warning" role="progressbar" style="width: 60%"
                                                     aria-valuenow="50%" aria-valuemin="0" aria-valuemax="100">
                                                 </div>
                                             </div>
+                                            <h4 class="small font-weight-bold" title="username">50%
+                                                <span class="float-right"></span>
+                                            </h4>
                                         </div>
                                     </div>
                                 @elseif($da->status == 'Completed')
                                     <div class="row">
-                                        <div class="col">
-                                            <img src="{{ asset('assets/img/undraw_profile_3.svg') }}" width="50px;"
-                                                alt="">
+                                        <div class="col text-center">
+                                            <img src="{{ asset('storage/pp/' . $da->user->poto) }}" width="50px;" alt="">
+                                            <h4 class="small font-weight-bold text-center">{{ $da->user->name }}</h4>
                                         </div>
 
                                         <div class="col-9">
-                                            <h4 class="small font-weight-bold">{{ $da->user->name }}
-                                                <span class="float-right">Complete!</span>
+                                            <h4 class="small font-weight-bold">{{ $da->task_title }}
+                                                <span class="float-right"></span>
                                             </h4>
                                             <div class="progress mb-4" title="{{ $da->task_title }}">
                                                 <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
@@ -151,18 +163,20 @@
                                                     title="{{ $da->task_title }}">
                                                 </div>
                                             </div>
+                                            <h4 class="small font-weight-bold">Completed!
+                                                <span class="float-right">{{ $da->updated_at }}</span>
+                                            </h4>
                                         </div>
                                     </div>
                                 @elseif($da->status == 'Incompleted')
                                     <div class="row">
-                                        <div class="col">
-                                            <img src="{{ asset('assets/img/undraw_profile_3.svg') }}" width="50px;"
-                                                alt="">
+                                        <div class="col text-center">
+                                            <img src="{{ asset('storage/pp/' . $da->user->poto) }}" width="50px;" alt="">
+                                            <h4 class="small font-weight-bold text-center">{{ $da->user->name }}</h4>
                                         </div>
                                         <div class="col-9">
-
-                                            <h4 class="small font-weight-bold">{{ $da->user->name }}
-                                                <span class="float-right">0%</span>
+                                            <h4 class="small font-weight-bold">{{ $da->task_title }}
+                                                <span class="float-right"></span>
                                             </h4>
                                             <div class="progress mb-4" title="{{ $da->task_title }}">
                                                 <div class="progress-bar bg-danger" role="progressbar" style="width: 5%"
@@ -170,10 +184,13 @@
                                                     title="{{ $da->task_title }}">
                                                 </div>
                                             </div>
+                                            <h4 class="small font-weight-bold">0%
+                                                <span class="float-right"></span>
+                                            </h4>
                                         </div>
                                     </div>
-                                @endif
-                                <hr>
+                                    @endif
+                                    <hr>
                             @endforeach
                         </div>
                     </div>
