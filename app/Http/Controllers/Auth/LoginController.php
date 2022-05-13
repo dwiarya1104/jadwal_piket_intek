@@ -71,14 +71,15 @@ public function apiLogin(Request $request)
 
         if( Auth::attempt(['email'=>$request->email, 'password'=>$request->password]) ) {
             $user = User::where('email', $request->email)->first();
-            $data = array(
+            $data = [
                 'id' => $user->id,
                 'name' => $user->name,
                 'username' => $user->username,
                 'email' => $user->email,
                 'role' => $user->getRoleNames()->implode('')
-            );
-            return response()->json(['status' => 'success','message'=> 'Login Successfuly', 'data' => $data,], 200);
+            ]
+            ;
+            return response()->json($data, 200);
         } else {
             return response()->json(['status' => 'error', 'message'=> 'Login Failed'], 403);
         }

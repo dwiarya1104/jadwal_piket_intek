@@ -181,6 +181,10 @@
                                         <small>{{ \Auth::user()->email }}</small>
                                     </h6>
                                 </li>
+                                <div class="dropdown-divider mx-1"></div>
+                                <button>
+                                    change profile
+                                </button>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     {{-- <div class="pull-left"> --}}
@@ -188,7 +192,7 @@
                                     {{-- </div> --}}
                                     <div class="dropdown-divider mx-1"></div>
                                     <div class="pull-right">
-                                        <a class="btn btn-default btn-flat float-right" style="font-size: 15px;"
+                                        <a class="btn btn-default btn-flat float-left" style="font-size: 12px; color:#e74a3b"
                                             href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
                                             <i class="fas fa-sign-out-alt mr-1"></i>{{ __('Logout') }}
