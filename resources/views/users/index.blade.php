@@ -118,7 +118,14 @@
                                 @foreach ($data as $d)
                                     <tr>
                                         <td>{{ $serial++ }}</td>
-                                        <td><img src="{{ asset('storage/pp/' . $d->poto) }}" alt="" style="width: 50px;">
+                                        <td>
+                                            @if ($d->poto)
+                                                <img src="{{ asset('storage/pp/' . $d->poto) }}" alt=""
+                                                    class="rounded-circle" style="width: 50px;">
+                                            @else
+                                                <img src="{{ asset('assets/img/default.svg') }}" alt=""
+                                                    class="rounded-circle" style="width: 50px;">
+                                            @endif
                                         </td>
                                         <td>{{ $d->name }}</td>
                                         <td>{{ $d->username }}</td>

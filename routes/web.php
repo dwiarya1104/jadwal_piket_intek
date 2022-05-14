@@ -34,6 +34,7 @@ Route::group(['middleware' => 'role:admin'], function () {
         // Route::get('/', [UserController::class, 'index'])->name('users.index');
         Route::post('/storeUserOfficeBoy', [UserController::class, 'store'])->name('users.store');
         Route::get('/{id}/editOfficeBoy', [UserController::class, 'edit'])->name('users.edit');
+        // Route::put('/{id}/editProfile', [UserController::class, 'editProfile'])->name('users.editProfile');
         Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('users.delete');
         Route::put('/update/{id}', [UserController::class, 'update'])->name('users.update');
     });
@@ -56,4 +57,7 @@ Route::group(['prefix' => 'schedule'], function(){
     Route::post('/storeSchedule', [ScheduleController::class, 'store'])->name('schedule.store');
     Route::delete('/deleteSchedule/{id}', [ScheduleController::class, 'destroy'])->name('schedule.delete');
     Route::put('/updateSchedule/{id}', [ScheduleController::class, 'update'])->name('schedule.update');
+
+        Route::put('/{id}/editProfile', [UserController::class, 'editProfile'])->name('users.editProfile');
+
 });

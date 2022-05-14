@@ -36,18 +36,18 @@
                 </div>
                 <div class="modal-body">
                     <!--FORM UPDATE BARANG-->
-                    <form action="{{ route('schedule.updateUser', \Auth::user()->id) }}" method="POST"
+                    <form action="{{ route('users.editProfile', \Auth::user()->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="row">
                             <div class="col-4">
-                                @if (\Auth::user()->img)
-                                    <img src="{{ asset('storage/bukti/' . \Auth::user()->img) }}" alt="" width="70%"
-                                        style="display:flex;margin-left: auto; margin-right:auto">
+                                @if (\Auth::user()->poto)
+                                    <img class="img-profile rounded-circle "
+                                        src="{{ asset('storage/pp/' . \Auth::user()->poto) }}" width=100%>
                                 @else
-                                    <img class="img-profile rounded-circle center"
-                                        src="{{ asset('storage/pp/' . \Auth::user()->poto) }}">
+                                    <img class="img-profile rounded-circle "
+                                        src="{{ asset('assets/img/default.svg') }}" width=100%>
                                 @endif
                             </div>
                             <div class="col-8">
@@ -70,8 +70,9 @@
                                     </div>
                                 </div>
                                 <label for="#" class="font-weight-bold h6 mt-3">Choose your profile picture</label>
+                                <input type="hidden" name="oldImage" value={{ \Auth::user()->poto }}>
                                 <div class="form-group">
-                                    <input type="file" class="form-control" name="upload_bukti">
+                                    <input type="file" class="form-control" name="poto">
                                 </div>
                             </div>
                         </div>
@@ -250,16 +251,28 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span
                                     class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->username }}</span>
-                                <img class="img-profile rounded-circle"
-                                    src="{{ asset('storage/pp/' . \Auth::user()->poto) }}">
+                                @if (\Auth::user()->poto)
+                                    <img class="img-profile rounded-circle"
+                                        src="{{ asset('storage/pp/' . \Auth::user()->poto) }}">
+                                @else
+                                    <img class="img-profile rounded-circle"
+                                        src="{{ asset('assets/img/default.svg') }}">
+                                @endif
                             </a>
                             <!-- Dropdown - User Information -->
                             <ul class="dropdown-menu dropdown-menu-right shadow animated--grow-in justify-content-center align-items-center"
                                 aria-labelledby="userDropdown">
                                 <!-- The user image in the menu -->
                                 <li class="user-header align-items-center justify-content-center text-center">
-                                    <img src="{{ asset('storage/pp/' . \Auth::user()->poto) }}"
-                                        class="img-circle my-3 mx-3" style="width:50px;" alt="User Image">
+                                    @if (\Auth::user()->poto)
+                                        <img src="{{ asset('storage/pp/' . \Auth::user()->poto) }}"
+                                            class="img-circle rounded-circle my-3 mx-3" style="width:50px;"
+                                            alt="User Image">
+                                    @else
+                                        <img src="{{ asset('assets/img/default.svg') }}"
+                                            class="img-circle rounded-circle my-3 mx-3" style="width:50px;"
+                                            alt="User Image">
+                                    @endif
                                     <h6 class="col">
                                         {{ \Auth::user()->name }}
                                         <br>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Hash;
+use File;
+use Storage;
 
 class UserController extends Controller
 {
@@ -79,6 +81,28 @@ class UserController extends Controller
         $data = User::find($id);
 
         return view('users.edit')->with('data', $data);
+    }
+
+    public function editProfile(Request $request,$id) {
+
+        $data = User::findOrFail($id);
+
+        $img = $request->file('poto');
+        $filename = $img->getClientOriginalName();
+
+
+        $data->poto = $request->file('poto')->getClientOriginalName();
+        if ($request->hasFile('poto')) {
+            if($request->oldImage) {
+                Storage::delete('/pp/'.$request->oldImage);
+            }
+            $request->file('poto')->storeAs('/pp',$filename);
+        }
+        $data->name = $request->name;
+        $data->username = $request->username;
+        $data->update();
+
+        return redirect()->back()->with('success', 'success change profile');
     }
 
     /**

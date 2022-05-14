@@ -28,8 +28,11 @@ class ScheduleController extends Controller
 
         // munclin data berdasarkan user yang login
         $user = Auth::user();
-        $data = Schedule::select("*")->where('user_id', $user->id)->whereDate('tanggal', Carbon::today())->get();
-        $dataadmin = Schedule::all();
+        $data = Schedule::select("*")->where('user_id', $user->id)
+        ->whereDate('tanggal', Carbon::today())
+        ->get();
+
+        $dataadmin = Schedule::orderBy('tanggal','DESC')->get();
 
         return view('schedule.index', compact(['users', 'data', 'dataadmin']));
     }
@@ -142,7 +145,6 @@ class ScheduleController extends Controller
     public function updateUser(Request $request, Schedule $schedule, $id)
     {
         $data = Schedule::where('id', $id)->firstOrFail();
-        // dd($data);
         $request->validate([
             "status" => 'required',
             "upload_bukti" => 'required|file|max:3072',
@@ -158,6 +160,7 @@ class ScheduleController extends Controller
 
         $data->upload_bukti = $request->file('upload_bukti')->getClientOriginalName();
         $data->update();
+        // dd($data);
 
         return redirect()->route('schedule.index')->with('success', '<h4>Successfully Updated Schedule</h4>');;
     }

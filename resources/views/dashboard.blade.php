@@ -126,8 +126,13 @@
                                 @if ($da->status == 'On Progress')
                                     <div class="row">
                                         <div class="col text-center">
-                                            {{-- <img src="{{ asset('storage/pp/' . $da->poto) }} " width="50px;" alt="" /> --}}
-                                            <img src="{{ asset('storage/pp/' . $da->user->poto) }}" alt="" width="50px;">
+                                            @if ($da->poto)
+                                                <img src="{{ asset('storage/pp/' . $da->poto) }}" alt=""
+                                                    class="rounded-circle" style="width: 50px;">
+                                            @else
+                                                <img src="{{ asset('assets/img/default.svg') }}" alt=""
+                                                    class="rounded-circle" style="width: 50px;">
+                                            @endif
                                             <h4 class=" small font-weight-bold text-center">{{ $da->user->name }}
                                             </h4>
                                         </div>
@@ -149,7 +154,13 @@
                                 @elseif($da->status == 'Completed')
                                     <div class="row">
                                         <div class="col text-center">
-                                            <img src="{{ asset('storage/pp/' . $da->user->poto) }}" width="50px;" alt="">
+                                            @if ($da->poto)
+                                                <img src="{{ asset('storage/pp/' . $da->poto) }}" alt=""
+                                                    class="rounded-circle" style="width: 50px;">
+                                            @else
+                                                <img src="{{ asset('assets/img/default.svg') }}" alt=""
+                                                    class="rounded-circle" style="width: 50px;">
+                                            @endif
                                             <h4 class="small font-weight-bold text-center">{{ $da->user->name }}</h4>
                                         </div>
 
@@ -171,7 +182,13 @@
                                 @elseif($da->status == 'Incompleted')
                                     <div class="row">
                                         <div class="col text-center">
-                                            <img src="{{ asset('storage/pp/' . $da->user->poto) }}" width="50px;" alt="">
+                                            @if ($da->poto)
+                                                <img src="{{ asset('storage/pp/' . $da->poto) }}" alt=""
+                                                    class="rounded-circle" style="width: 50px;">
+                                            @else
+                                                <img src="{{ asset('assets/img/default.svg') }}" alt=""
+                                                    class="rounded-circle" style="width: 50px;">
+                                            @endif
                                             <h4 class="small font-weight-bold text-center">{{ $da->user->name }}</h4>
                                         </div>
                                         <div class="col-9">
@@ -189,8 +206,12 @@
                                             </h4>
                                         </div>
                                     </div>
-                                    @endif
+                                @endif
+
+                                @if (\App\Schedule::count() == 1)
+                                @else
                                     <hr>
+                                @endif
                             @endforeach
                         </div>
                     </div>
