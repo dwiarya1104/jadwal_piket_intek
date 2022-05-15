@@ -27,6 +27,8 @@
                         <div class="form-group">
                             <input type="file" class="form-control" name="upload_bukti">
                         </div>
+                        <input type="hidden" name="oldImage" value="{{ $da->upload_bukti }}">
+                        {{-- <input type="hidden" name="tanggal" value="{{ $da->tanggal }}"> --}}
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-primary bt-sm right">Save Change</button>

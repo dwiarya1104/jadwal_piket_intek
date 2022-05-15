@@ -24,7 +24,7 @@
 </head>
 
 <body id="page-top">
-    <div class="modal fade" id="modalEditUser{{ \Auth::user()->id }}" tabindex="-1"
+    <div class="modal fade" id="modalEditProfile{{ \Auth::user()->id }}" tabindex="-1"
         aria-labelledby="modalUpdateBarang" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -167,8 +167,8 @@
                     <span>Schedules</span></a>
             </li>
             @hasrole('admin')
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
+                <li class="nav-item {{ request()->is('activity*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{route('activities.index')}}">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Pelaporan / Report</span></a>
                 </li>
@@ -281,7 +281,7 @@
                                 </li>
                                 <div class="dropdown-divider mx-1"></div>
                                 <a class="btn btn-transparent btn-sm" style="font-size" data-toggle="modal"
-                                    data-target="#modalEditUser{{ \Auth::user()->id }}">
+                                    data-target="#modalEditProfile{{ \Auth::user()->id }}">
                                     <i class="fas fa-cog"></i>&nbsp;
                                     {{ __('Edit Profile') }}
                                 </a>

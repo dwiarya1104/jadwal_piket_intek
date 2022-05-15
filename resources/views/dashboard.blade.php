@@ -116,7 +116,7 @@
                         </div>
                         <!-- Card Body -->
                         <div class="card-body">
-                            @if (\App\Schedule::count() == 0)
+                            @if (\App\Schedule::where('tanggal', 'tanggal')->count() == 0)
                                 <h5 class="text-center">No Schedule Yet</h5>
                             @endif
                             @foreach ($data as $da)

@@ -145,10 +145,22 @@ class ScheduleController extends Controller
     public function updateUser(Request $request, Schedule $schedule, $id)
     {
         $data = Schedule::where('id', $id)->firstOrFail();
+        // $getDataUser = User::get();
         $request->validate([
             "status" => 'required',
             "upload_bukti" => 'required|file|max:3072',
         ]);
+
+
+        $activityLog = [
+        'name' => $data->user->name,
+        'pp' => $data->user->poto,
+        'status_activity' => "Update",
+        'status_jadwal' => $request->status,
+        'gambar' => $request->file('upload_bukti')->getClientOriginalName(),
+        'tanggal' => $data->tanggal,
+        ];
+        // return dd($activityLog);
 
         $data->status = $request->status;
         $img = $request->file('upload_bukti');
@@ -159,6 +171,8 @@ class ScheduleController extends Controller
         }
 
         $data->upload_bukti = $request->file('upload_bukti')->getClientOriginalName();
+
+        DB::table('user_activity_log')->insert($activityLog);
         $data->update();
         // dd($data);
 
@@ -181,5 +195,6 @@ class ScheduleController extends Controller
         $data->delete();
 
         return redirect()->route('schedule.index')->with('success', '<h4>Successfully Deleted Schedule</h4>');;
-    }
+
+   }
 }

@@ -15,7 +15,14 @@ class CreateUserActivityLogTable extends Migration
     {
         Schema::create('user_activity_log', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->string('name')->nullable();
+            $table->string('pp')->nullable();
+            $table->string('status_activity')->nullable();
+            $table->string('gambar')->nullable();
+            $table->string('status_jadwal')->nullable();
+            $table->string('tanggal')->nullable();
+            $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
     }
 
