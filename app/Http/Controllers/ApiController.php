@@ -20,8 +20,8 @@ class ApiController extends Controller
     }
 
 
-    public function update(Request $request,$id) {
-        $data = Schedule::where('id', $id)->firstOrFail();
+    public function update(Request $request) {
+        $data = Schedule::where('id', $request->id)->firstOrFail();
         // $getDataUser = User::get();
         $request->validate([
             "status" => 'required',
