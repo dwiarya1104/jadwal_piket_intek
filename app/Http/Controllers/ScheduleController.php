@@ -60,6 +60,7 @@ class ScheduleController extends Controller
         $users = User::orderBy('name', 'ASC')
             ->get()
             ->pluck('name', 'id');
+        // return dd($users);
 
         $this->validate($request, [
             "task_title" => 'required',
@@ -74,7 +75,18 @@ class ScheduleController extends Controller
         $data->task_description = $request->task_description;
         $data->user_id = $request->user_id;
         $data->tanggal = $request->tanggal;
+
+        $admin = Auth::user()->name;
+        $activityLog = [
+        'name_user' => $data->user->name,
+        'name_admin' => $admin,
+        'status_activity' => "Tambah",
+        'tanggal' => $data->tanggal,
+        // <!-- 'status_jadwal' => , -->
+        ];
+        DB::table('user_activity_log')->insert($activityLog);
         $data->save();
+        // return dd($admin);
         return redirect()->route('schedule.index')->with('success', '<h4>Successfully Added Schedule</h4>');;
     }
 
@@ -153,7 +165,7 @@ class ScheduleController extends Controller
 
 
         $activityLog = [
-        'name' => $data->user->name,
+        'name_user' => $data->user->name,
         'pp' => $data->user->poto,
         'status_activity' => "Update",
         'status_jadwal' => $request->status,
@@ -176,7 +188,7 @@ class ScheduleController extends Controller
         $data->update();
         // dd($data);
 
-        return redirect()->route('schedule.index')->with('success', '<h4>Successfully Updated Schedule</h4>');;
+        return redirect()->route('schedule.index')->with('success', '<h4>Successfully Updated Schedule</h4>');
     }
 
 

@@ -18,5 +18,29 @@ class ApiController extends Controller
         }
         return response()->json($cek);
     }
-    
+
+
+    public function update(Request $request,$id) {
+        $data = Schedule::where('id', $id)->firstOrFail();
+        // $getDataUser = User::get();
+        $request->validate([
+            "status" => 'required',
+            "upload_bukti" => 'required|file|max:3072',
+        ]);
+
+        $data->status = $request->status;
+        $img = $request->file('upload_bukti');
+        $filename = $img->getClientOriginalName();
+
+        if ($request->hasFile('upload_bukti')) {
+            $request->file('upload_bukti')->storeAs('/bukti',$filename);
+        }
+
+        $data->upload_bukti = $request->file('upload_bukti')->getClientOriginalName();
+
+        $data->update();
+
+        return response()->json(['message' => 'Berhasil mengubah data'],200);
+
+}
 }

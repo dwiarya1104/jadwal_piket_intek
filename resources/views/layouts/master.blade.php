@@ -168,9 +168,9 @@
             </li>
             @hasrole('admin')
                 <li class="nav-item {{ request()->is('activity*') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{route('activities.index')}}">
+                    <a class="nav-link" href="{{ route('activities.index') }}">
                         <i class="fas fa-fw fa-table"></i>
-                        <span>Pelaporan / Report</span></a>
+                        <span>Activities</span></a>
                 </li>
             @endhasrole
             <!-- Divider -->

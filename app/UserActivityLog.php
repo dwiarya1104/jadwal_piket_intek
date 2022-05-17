@@ -8,11 +8,12 @@ class UserActivityLog extends Model
 {
     protected $table = 'user_activity_log';
     protected $fillable = [
-        'name',
+        'name_user',
+        'name_admin',
         'pp',
         'status_activity',
         'status_jadwal',
         'tanggal',
-        'gambar',
+        'created_at',
     ];
 }

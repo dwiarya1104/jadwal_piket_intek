@@ -23,3 +23,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('login', 'Auth\LoginController@apiLogin');
 
 Route::post('schedule','ApiController@schedule');
+Route::put('update/{user_id}/{id}', 'ApiController@update');

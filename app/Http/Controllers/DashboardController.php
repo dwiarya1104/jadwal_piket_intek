@@ -17,7 +17,8 @@ class DashboardController extends Controller
     {
         $data = Schedule::orderBy('updated_at','DESC')->whereDate('tanggal', Carbon::today())->get();
         $day = Carbon::today()->format('d-m-Y');
-        return view('dashboard', compact(['data','day']));
+        $today =Carbon::today();
+        return view('dashboard', compact(['data','day','today']));
     }
 
     /**
