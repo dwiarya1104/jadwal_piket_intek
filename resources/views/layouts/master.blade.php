@@ -167,9 +167,16 @@
                     <span>Schedules</span></a>
             </li>
             @hasrole('admin')
+                <li class="nav-item {{ request()->is('history*') ? 'active' : '' }}">
+                    <a class="nav-link" href="">
+                        <i class="fas fa-fw fa-history"></i>
+                        <span>Histories</span></a>
+                </li>
+            @endhasrole
+            @hasrole('admin')
                 <li class="nav-item {{ request()->is('activity*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('activities.index') }}">
-                        <i class="fas fa-fw fa-table"></i>
+                        <i class="fas fa-fw fa-tasks"></i>
                         <span>Activities</span></a>
                 </li>
             @endhasrole

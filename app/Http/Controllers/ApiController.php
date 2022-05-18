@@ -40,7 +40,7 @@ class ApiController extends Controller
 
         $data->update();
 
-        return response()->json(['message' => 'Berhasil mengubah data'],200);
+        return response()->json(['success'=> true,'message' => 'Berhasil Mengupdate data'],200);
 
 }
 }
