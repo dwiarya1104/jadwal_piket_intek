@@ -42,5 +42,24 @@ class ApiController extends Controller
 
         return response()->json(['success'=> true,'message' => 'Berhasil Mengupdate data'],200);
 
-}
+    }
+
+    public function addSchedule(Request $request) {
+
+            $this->validate($request, [
+                "task_title" => 'required',
+                "task_description" => 'required',
+                "user_id" => 'required',
+                "tanggal" => 'required',
+            ]);
+        $data = new Schedule();
+            // dd($data);
+            $data->task_title = $request->task_title;
+            $data->task_description = $request->task_description;
+            $data->user_id = $request->user_id;
+            $data->tanggal = $request->tanggal;
+        $data->save();
+
+        return response()->json(['success'=> true,'message' => 'Berhasil Menambah Schedule'],200);
+    }
 }
