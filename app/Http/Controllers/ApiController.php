@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Schedule;
 use Carbon\Carbon;
+use App\User;
 use Storage;
 
 use Illuminate\Http\Request;
@@ -46,7 +47,7 @@ class ApiController extends Controller
 
     public function addSchedule(Request $request) {
 
-            $this->validate($request, [
+        $this->validate($request, [
                 "task_title" => 'required',
                 "task_description" => 'required',
                 "user_id" => 'required',
@@ -61,5 +62,36 @@ class ApiController extends Controller
         $data->save();
 
         return response()->json(['success'=> true,'message' => 'Berhasil Menambah Schedule'],200);
+    }
+
+    public function registration(Request $request ){
+        $data = User::where('id',$request->id)->firstOrFail();
+
+        $request->validate([
+            'registration' => 'required'
+        ]);
+        $data->registration = $request->registration;
+        $data->update();
+
+
+        return response()->json(['success' => 'true', 'message' => 'Berhasil Menambahkan registrationIds','data' => $data]);
+    }
+
+    public function dataOb(Request $request) {
+        $data = User::role('user')->get();
+
+        $data_fix=[];
+            foreach ($data as $d){
+                $data_change['id']=$d->id;
+                $data_change['name']=$d->name;
+                $data_fix[]=$data_change;
+            }
+        return response()->json($data_fix);
+    }
+
+    public function dataSchedule() {
+        $data = Schedule::all();
+
+    return response()->json($data);
     }
 }

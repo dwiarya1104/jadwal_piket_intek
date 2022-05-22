@@ -24,5 +24,7 @@ Route::post('login', 'Auth\LoginController@apiLogin');
 
 Route::post('schedule','ApiController@schedule');
 Route::post('update', 'ApiController@update');
-Route::post('addSchedule', 'ApiController@addSchedule')
-;
+Route::post('addSchedule', 'ApiController@addSchedule');
+Route::get('dataOb','ApiController@dataOb');
+Route::get('dataSchedule','ApiController@dataSchedule');
+Route::post('registration','ApiController@registration');
