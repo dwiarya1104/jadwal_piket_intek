@@ -21,7 +21,9 @@
                                 <div class="col mr-2">
                                     <div class=" font-weight-bold text-primary text-uppercase mb-1 mt-2">
                                         Schedules</div>
-                                    <div class="h4 mb-0 font-weight-bold text-gray-800">{{ \App\Schedule::count() }}</div>
+                                    <div class="h4 mb-0 font-weight-bold text-gray-800">
+                                        {{ \App\Schedule::where('tanggal', $today)->count() }}
+                                    </div>
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-calendar-check fa-2x text-gray-300" style="font-size:40px;"></i>

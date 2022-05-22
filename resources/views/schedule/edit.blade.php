@@ -41,7 +41,7 @@
                         <div class="form-group">
                             <label for="#" class="font-weight-bold h6 mt-3">Tanggal</label>
                             <input type="date" class="form-control" name="tanggal" id="tanggal"
-                                placeholder="Start Time">
+                                placeholder="Start Time"  value={{ old('tanggal', $ok->tanggal) }}>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary bt-sm mt-4">Save Change</button>

@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DashboardController;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Controllers\HistoryController;
 
 
 /*
@@ -62,3 +63,4 @@ Route::group(['prefix' => 'schedule'], function(){
         Route::put('/{id}/editProfile', [UserController::class, 'editProfile'])->name('users.editProfile');
 });
 Route::get('/activity', 'ActivityController@index')->name('activities.index');
+Route::get('/history', 'HistoryController@index')->name('history.index');

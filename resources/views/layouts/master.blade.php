@@ -130,7 +130,8 @@
 
             <!-- Nav Item - Dashboard -->
             @hasrole('admin')
-                <li class="nav-item {{ request()->is('dashboard*') ? 'active' : '' }}">
+                <li class="nav-item
+                ">
                     <a class="nav-link" href="{{ url('/dashboard') }}">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
@@ -168,7 +169,7 @@
             </li>
             @hasrole('admin')
                 <li class="nav-item {{ request()->is('history*') ? 'active' : '' }}">
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="{{ route('history.index') }}">
                         <i class="fas fa-fw fa-history"></i>
                         <span>Histories</span></a>
                 </li>
