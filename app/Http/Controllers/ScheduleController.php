@@ -160,37 +160,59 @@ class ScheduleController extends Controller
     {
         $data = Schedule::where('id', $id)->firstOrFail();
         // $getDataUser = User::get();
-        $request->validate([
-            "status" => 'required',
-            "upload_bukti" => 'required|file|max:3072',
-        ]);
+        if($request->hasFile('upload_bukti')){
+            $request->validate([
+                "status" => 'required',
+                "upload_bukti" => 'file|max:3072',
+            ]);
+        }else{
+            if($request->status=='Completed'){
+                Alert::error('Gagal!', 'Tolong Upload Bukti!');
+                return redirect()->back()->with('msg','Gagal!');
+            }
+        }
 
 
-        $activityLog = [
-        'name_user' => $data->user->name,
-        'pp' => $data->user->poto,
-        'status_activity' => "Update",
-        'status_jadwal' => $request->status,
-        'gambar' => $request->file('upload_bukti')->getClientOriginalName(),
-        'tanggal' => $data->tanggal,
-        ];
+        // $activityLog = [
+        // 'name_user' => $data->user->name,
+        // 'pp' => $data->user->poto,
+        // 'status_activity' => "Update",
+        // 'status_jadwal' => $request->status,
+        // 'gambar' => $request->file('upload_bukti')->getClientOriginalName(),
+        // 'tanggal' => $data->tanggal,
+        // ];
         // return dd($activityLog);
+
+
+        // if($request->fails()) {
+        //     return redirect()->back()->withErrors($request);
+        // }
 
         $data->status = $request->status;
         $img = $request->file('upload_bukti');
-        $filename = $img->getClientOriginalName();
+        if ($img == null) {
+            $filename = null;
+        } else {
+            $filename = $img->getClientOriginalName();
+        }
 
         if ($request->hasFile('upload_bukti')) {
             $request->file('upload_bukti')->storeAs('/bukti',$filename);
         }
 
-        $data->upload_bukti = $request->file('upload_bukti')->getClientOriginalName();
+        if ($data->status == 'Incompleted') {
+            $data->upload_bukti = null;
+        } else {
+            $data->upload_bukti = $request->file('upload_bukti')->getClientOriginalName();
+        }
 
-        DB::table('user_activity_log')->insert($activityLog);
+
+        // DB::table('user_activity_log')->insert($activityLog);
         $data->update();
         // dd($data);
 
         return redirect()->route('schedule.index')->with('success', '<h4>Successfully Updated Schedule</h4>');
+
     }
 
 
