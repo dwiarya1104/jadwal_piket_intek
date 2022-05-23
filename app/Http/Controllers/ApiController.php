@@ -11,7 +11,10 @@ use Illuminate\Http\Request;
 class ApiController extends Controller
 {
     public function schedule(Request $request) {
-        $cek = Schedule::where('user_id',$request->user_id)->whereDate('tanggal', Carbon::today())->get();
+        $cek = Schedule::where('user_id',$request->user_id)
+        ->orderBy('created_at','DESC')
+        ->whereDate('tanggal', Carbon::today())
+        ->get();
         // dd($cek);
 
         if(count($cek) == 0) {
@@ -23,26 +26,40 @@ class ApiController extends Controller
 
     public function update(Request $request) {
         $data = Schedule::where('id', $request->id)->firstOrFail();
-        // $getDataUser = User::get();
-        $request->validate([
-            "status" => 'required',
-            "upload_bukti" => 'required|file|max:3072',
-        ]);
+        if($request->hasFile('upload_bukti')){
+            $request->validate([
+                "status" => 'required',
+                "upload_bukti" => 'file|max:3072',
+            ]);
+        }else{
+            if($request->status=='Completed'){
+                return response()->json([
+                    'succes' => 'false',
+                    'message' => 'Gagal! Harap Mengisi Image'
+                ]);
 
+            }
+        }
         $data->status = $request->status;
         $img = $request->file('upload_bukti');
-        $filename = $img->getClientOriginalName();
+        if ($img == null) {
+            $filename = null;
+        } else {
+            $filename = $img->getClientOriginalName();
+        }
 
         if ($request->hasFile('upload_bukti')) {
             $request->file('upload_bukti')->storeAs('/bukti',$filename);
         }
 
-        $data->upload_bukti = $request->file('upload_bukti')->getClientOriginalName();
+        if ($data->status == 'Incompleted') {
+            $data->upload_bukti = null;
+        } else {
+            $data->upload_bukti = $request->file('upload_bukti')->getClientOriginalName();
+        }
 
         $data->update();
-
         return response()->json(['success'=> true,'message' => 'Berhasil Mengupdate data'],200);
-
     }
 
     public function addSchedule(Request $request) {
@@ -90,7 +107,7 @@ class ApiController extends Controller
     }
 
     public function dataSchedule() {
-        $data = Schedule::all();
+        $data = Schedule::orderBy('created_at','DESC')->get();
 
     return response()->json($data);
     }
