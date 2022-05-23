@@ -76,7 +76,8 @@ public function apiLogin(Request $request)
                 'name' => $user->name,
                 'username' => $user->username,
                 'email' => $user->email,
-                'role' => $user->getRoleNames()->implode('')
+                'role' => $user->getRoleNames()->implode(''),
+                'registration' => $user->registration,
             );
             return response()->json(['status' => 'success','message'=> 'Login Successfuly', 'data' => $data,], 200);
         } else {
