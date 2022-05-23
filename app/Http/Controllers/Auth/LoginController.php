@@ -76,6 +76,7 @@ public function apiLogin(Request $request)
                 'name' => $user->name,
                 'username' => $user->username,
                 'email' => $user->email,
+                'poto' => $user->poto,
                 'role' => $user->getRoleNames()->implode(''),
                 'registration' => $user->registration,
             );
