@@ -30,6 +30,7 @@ class ApiController extends Controller
             $request->validate([
                 "status" => 'required',
                 "upload_bukti" => 'file|max:3072',
+                "task_description" => 'required'
             ]);
         }else{
             if($request->status=='Completed'){
@@ -57,6 +58,7 @@ class ApiController extends Controller
         } else {
             $data->upload_bukti = $request->file('upload_bukti')->getClientOriginalName();
         }
+        $data->task_description = $request->task_description;
 
         $data->update();
         return response()->json(['success'=> true,'message' => 'Berhasil Mengupdate data'],200);

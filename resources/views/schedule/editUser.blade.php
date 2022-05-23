@@ -27,14 +27,7 @@
                         <div class="form-group">
                             <input type="file" class="form-control" name="upload_bukti">
                         </div>
-                        <input type="hidden" name="oldImage" class="@error('upload_bukti') is-invalid @enderror"
-                            value="{{ $da->upload_bukti }}">
-
-                        @error('upload_bukti')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        <input type="hidden" name="oldImage" value="{{ $da->upload_bukti }}">
                         {{-- <input type="hidden" name="tanggal" value="{{ $da->tanggal }}"> --}}
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
