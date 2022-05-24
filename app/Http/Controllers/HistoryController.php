@@ -8,7 +8,7 @@ use App\Schedule;
 class HistoryController extends Controller
 {
     public function index() {
-        $data = Schedule::where('status','On Progress,Completed')->get();
+        $data = Schedule::where('status','Incompleted')->orWhere('status','=','Completed')->get();
 
         return view('history.index',compact(['data']));
     }

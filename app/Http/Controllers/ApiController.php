@@ -103,6 +103,7 @@ class ApiController extends Controller
             foreach ($data as $d){
                 $data_change['id']=$d->id;
                 $data_change['name']=$d->name;
+                $data_change['registration']=$d->registration;
                 $data_fix[]=$data_change;
             }
         return response()->json($data_fix);
