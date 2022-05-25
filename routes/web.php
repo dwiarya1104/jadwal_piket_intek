@@ -63,4 +63,8 @@ Route::group(['prefix' => 'schedule'], function(){
         Route::put('/{id}/editProfile', [UserController::class, 'editProfile'])->name('users.editProfile');
 });
 Route::get('/activity', 'ActivityController@index')->name('activities.index');
-Route::get('/history', 'HistoryController@index')->name('history.index');
+
+Route::group(['prefix' => 'history'],function () {
+    Route::get('/', 'HistoryController@index')->name('history.index');
+    Route::delete('delete/{id}','HistoryController@destroy')->name('history.destroy');
+});

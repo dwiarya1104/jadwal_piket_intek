@@ -46,7 +46,7 @@
                             <div class="col-4">
                                 @if (\Auth::user()->poto)
                                     <img class="img-profile rounded-circle "
-                                        src="{{ asset('storage/pp/' . \Auth::user()->poto) }}" width=100%>
+                                        src="{{ asset('storage/pp/' . \Auth::user()->poto) }}" width=100% height=80%>
                                 @else
                                     <img class="img-profile rounded-circle "
                                         src="{{ asset('assets/img/default.svg') }}" width=100%>
@@ -54,7 +54,7 @@
                             </div>
                             <div class="col-8">
                                 <div class="form-row">
-                                    <div class="form-group col-6">
+                                    <div cl~ass="form-group col-6">
                                         <label for="#" class="font-weight-bold h6">Name</label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror"
                                             id="name" name="name" id="email" placeholder="Name"

@@ -32,9 +32,9 @@ class ScheduleController extends Controller
         ->whereDate('tanggal', Carbon::today())
         ->get();
 
-        $dataadmin = Schedule::orderBy('tanggal','DESC')
+        $dataadmin = Schedule::orderBy('tanggal','ASC')
         ->where('status','On Progress')
-        ->whereDate('tanggal',Carbon::today())
+        ->whereDate('tanggal','>=',Carbon::today())
         ->get();
 
         return view('schedule.index', compact(['users', 'data', 'dataadmin']));

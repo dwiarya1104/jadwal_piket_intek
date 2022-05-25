@@ -137,7 +137,22 @@ class ApiController extends Controller
 
     public function history(Request $request){
         $data = Schedule::where('status','!=','On Progress')->where('tanggal',$request->tanggal)->get();
-            return response()->json($data);
+
+        $data_fix=[];
+            foreach ($data as $d){
+                $data_change['id']=$d->id;
+                $data_change['task_title']=$d->task_title;
+                $data_change['task_description']=$d->task_description;
+                $data_change['tanggal']=$d->tanggal;
+                $data_change['status']=$d->status;
+                $data_change['upload_bukti']=$d->upload_bukti;
+                $data_change['user_id']=$d->user->name;
+                $data_change['updated_at']=$d->updated_at;
+                $data_change['created_at']=$d->created_at;
+                $data_fix[]=$data_change;
+            }
+
+            return response()->json($data_fix);
     }
 
     public function deleteSchedule(Request $request) {
@@ -152,3 +167,4 @@ class ApiController extends Controller
         return response()->json(['success' => true, 'Message' => 'Berhasil Delete Schedule']);
     }
 }
+
