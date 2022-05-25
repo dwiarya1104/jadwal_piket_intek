@@ -176,13 +176,13 @@
                         <span>Histories</span></a>
                 </li>
             @endhasrole
-            @hasrole('admin')
+            {{-- @hasrole('admin')
                 <li class="nav-item {{ request()->is('activity*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('activities.index') }}">
                         <i class="fas fa-fw fa-tasks"></i>
                         <span>Activities</span></a>
                 </li>
-            @endhasrole
+            @endhasrole --}}
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 

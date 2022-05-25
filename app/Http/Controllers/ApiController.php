@@ -54,7 +54,13 @@ class ApiController extends Controller
         }
 
         if ($data->status == 'Incompleted') {
+            if ($request->hasFile('upload_bukti')) {
+                $request->file('upload_bukti')->storeAs('/bukti',$filename);
+
+                $data->upload_bukti = $request->file('upload_bukti')->getClientOriginalName();
+            } else {
             $data->upload_bukti = null;
+            }
         } else {
             $data->upload_bukti = $request->file('upload_bukti')->getClientOriginalName();
         }

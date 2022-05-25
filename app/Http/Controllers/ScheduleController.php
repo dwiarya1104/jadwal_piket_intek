@@ -33,7 +33,8 @@ class ScheduleController extends Controller
         ->get();
 
         $dataadmin = Schedule::orderBy('tanggal','DESC')
-        // ->where('status','On Progress')
+        ->where('status','On Progress')
+        ->whereDate('tanggal',Carbon::today())
         ->get();
 
         return view('schedule.index', compact(['users', 'data', 'dataadmin']));
@@ -201,7 +202,13 @@ class ScheduleController extends Controller
         }
 
         if ($data->status == 'Incompleted') {
-            $data->upload_bukti = null;
+            if ($request->hasFile('upload_bukti')) {
+                $request->file('upload_bukti')->storeAs('/bukti',$filename);
+
+                $data->upload_bukti = $request->file('upload_bukti')->getClientOriginalName();
+            } else {
+                $data->upload_bukti = null;
+            }
         } else {
             $data->upload_bukti = $request->file('upload_bukti')->getClientOriginalName();
         }
@@ -234,4 +241,3 @@ class ScheduleController extends Controller
 
    }
 }
-

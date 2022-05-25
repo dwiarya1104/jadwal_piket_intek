@@ -12,13 +12,31 @@
                 <div class="card-body">
                     @hasrole('admin')
                         <div class="row">
-                            <div class="col-2 ">
+                            <div class="col">
+                                <h6>Date:</h6>
+                            </div>
+                        </div>
+                        <form id="filter-tanggal" method="GET" action={{ url('/history') }}>
+                            <div class="row justify-content-start">
+                                <div class="col-3">
+                                    <input class="form-control float-left mb-3" type="date" name="tanggal">
+                                </div>
+                                <div class="col-4">
+                                    <button type="submit" class="btn btn-primary">Filter</button>
+                                </div>
+                            </div>
+                        </form>
+                        {{-- <div class="row">
+                            <div class="col">
                                 <label for="">
                                     Date :
                                 </label>
-                                <input class="form-control float-left mb-3" type="date">
+                                <div class="col-4">
+                                    <input class="form-control float-left mb-3" type="date">
+                                    <button onclick={{ url('/history') }}>Filter</button>
+                                </div>
                             </div>
-                        </div>
+                        </div> --}}
                     @endhasrole
                     <div class="table-responsive">
                         <table class="table table-striped datatables" style="font-size:13px;" id="dataTable" width="100%"
@@ -47,7 +65,15 @@
                                         <td>{{ $d->task_description }}</td>
                                         <td>{{ $d->user->name }}</td>
                                         <td>{{ $d->tanggal }}</td>
-                                        <td>{{ $d->status }}</td>
+                                        <td>
+                                            @if ($d['status'] == 'On Progress')
+                                                <span class='badge badge-warning'>{{ $d->status }}</span>
+                                            @elseif ($d['status'] == 'Completed')
+                                                <span class='badge badge-success'>{{ $d->status }}</span>
+                                            @elseif ($d['status'] == 'Incompleted')
+                                                <span class='badge badge-danger'>{{ $d->status }}</span>
+                                            @endif
+                                        </td>
                                         <td>{{ $d->upload_bukti }}</td>
                                         <td>{{ $d->updated_at }}</td>
                                     </tr>
