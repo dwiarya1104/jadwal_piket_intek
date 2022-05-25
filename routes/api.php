@@ -29,3 +29,4 @@ Route::post('schedule','ApiController@schedule');
 Route::post('update', 'ApiController@update');
 Route::post('addSchedule', 'ApiController@addSchedule');
 Route::post('registration','ApiController@registration');
+Route::post('delete','ApiController@deleteSchedule');

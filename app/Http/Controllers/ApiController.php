@@ -118,7 +118,20 @@ class ApiController extends Controller
     public function dataSchedule() {
         $data = Schedule::orderBy('created_at','DESC')->where('tanggal','=',Carbon::today())->get();
 
-    return response()->json($data);
+        $data_fix=[];
+            foreach ($data as $d){
+                $data_change['id']=$d->id;
+                $data_change['task_title']=$d->task_title;
+                $data_change['task_description']=$d->task_description;
+                $data_change['tanggal']=$d->tanggal;
+                $data_change['status']=$d->status;
+                $data_change['upload_bukti']=$d->upload_bukti;
+                $data_change['user_id']=$d->user->name;
+                $data_change['updated_at']=$d->updated_at->format('Y-m-d');
+                $data_fix[]=$data_change;
+            }
+
+    return response()->json($data_fix);
     }
 
     public function history(Request $request){
@@ -128,6 +141,31 @@ class ApiController extends Controller
             $data = Schedule::whereDate('tanggal',Carbon::today())->get();
         }
 
-        return response()->json($data);
+        $data_fix=[];
+            foreach ($data as $d){
+                $data_change['id']=$d->id;
+                $data_change['task_title']=$d->task_title;
+                $data_change['task_description']=$d->task_description;
+                $data_change['tanggal']=$d->tanggal;
+                $data_change['status']=$d->status;
+                $data_change['upload_bukti']=$d->upload_bukti;
+                $data_change['user_id']=$d->user->name;
+                $data_change['updated_at']=$d->updated_at->format('Y-m-d');
+                $data_fix[]=$data_change;
+            }
+
+        return response()->json($data_fix);
+    }
+
+    public function deleteSchedule(Request $request) {
+        $data = Schedule::find($request->id);
+
+        if($data->upload_bukti){
+            Storage::delete('/bukti/'.$data->upload_bukti);
+        }
+
+        $data->delete();
+
+        return response()->json(['success' => true, 'Message' => 'Berhasil Delete Schedule']);
     }
 }
