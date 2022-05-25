@@ -116,8 +116,14 @@ class ApiController extends Controller
     }
 
     public function dataSchedule() {
-        $data = Schedule::orderBy('created_at','DESC')->get();
+        $data = Schedule::orderBy('created_at','DESC')->where('tanggal','=',Carbon::today())->get();
 
     return response()->json($data);
+    }
+
+    public function history(){
+        $data = Schedule::orderBy('created_at','DESC')->where('status','!=','On Progress')->get();
+
+        return response()->json($data);
     }
 }
