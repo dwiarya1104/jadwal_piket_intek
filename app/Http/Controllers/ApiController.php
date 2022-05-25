@@ -127,7 +127,8 @@ class ApiController extends Controller
                 $data_change['status']=$d->status;
                 $data_change['upload_bukti']=$d->upload_bukti;
                 $data_change['user_id']=$d->user->name;
-                $data_change['updated_at']=$d->updated_at->format('Y-m-d');
+                $data_change['updated_at']=$d->updated_at;
+                $data_change['created_at']=$d->created_at;
                 $data_fix[]=$data_change;
             }
 
@@ -150,7 +151,7 @@ class ApiController extends Controller
                 $data_change['status']=$d->status;
                 $data_change['upload_bukti']=$d->upload_bukti;
                 $data_change['user_id']=$d->user->name;
-                $data_change['updated_at']=$d->updated_at->format('Y-m-d');
+                $data_change['created_at']=$d->created_at;
                 $data_fix[]=$data_change;
             }
 
