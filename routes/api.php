@@ -23,6 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('login', 'Auth\LoginController@apiLogin');
 
 Route::get('dataOb','ApiController@dataOb');
+Route::get('dataAdmin','ApiController@dataAdmin');
 Route::get('dataSchedule','ApiController@dataSchedule');
 Route::post('history','ApiController@history');
 Route::post('schedule','ApiController@schedule');
