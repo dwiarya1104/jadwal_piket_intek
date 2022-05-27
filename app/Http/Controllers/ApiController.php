@@ -5,6 +5,7 @@ use App\Schedule;
 use Carbon\Carbon;
 use App\User;
 use Storage;
+use Auth;
 
 use Illuminate\Http\Request;
 
