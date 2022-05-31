@@ -25,6 +25,6 @@ class HistoryController extends Controller
         }
         $data->delete();
 
-        return redirect()->route('history.index')->with('success','Deleted History Succesfully');
+        return redirect()->back()->with('success','Deleted History Succesfully');
     }
 }

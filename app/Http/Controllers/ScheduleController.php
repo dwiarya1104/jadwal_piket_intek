@@ -79,15 +79,6 @@ class ScheduleController extends Controller
         $data->user_id = $request->user_id;
         $data->tanggal = $request->tanggal;
 
-        $admin = Auth::user()->name;
-        $activityLog = [
-        'name_user' => $data->user->name,
-        'name_admin' => $admin,
-        'status_activity' => "Tambah",
-        'tanggal' => $data->tanggal,
-        // <!-- 'status_jadwal' => , -->
-        ];
-        DB::table('user_activity_log')->insert($activityLog);
         $data->save();
         // return dd($admin);
         return redirect()->route('schedule.index')->with('success', '<h4>Successfully Added Schedule</h4>');;
@@ -136,16 +127,12 @@ class ScheduleController extends Controller
             "task_description" => 'required',
             "user_id" => 'required',
             "tanggal" => 'required',
-            // "start_time" => 'required',
-            // "end_time" => 'required',
         ]);
 
         $data->task_title = $request->task_title;
         $data->task_description = $request->task_description;
         $data->user_id = $request->user_id;
         $data->tanggal = $request->tanggal;
-        // $data->start_time = $request->start_time;
-        // $data->end_time = $request->end_time;
         $data->update();
         return redirect()->route('schedule.index')->with('success', '<h4>Successfully Updated Schedule</h4>');
     }
@@ -173,22 +160,6 @@ class ScheduleController extends Controller
             }
         }
 
-
-        // $activityLog = [
-        // 'name_user' => $data->user->name,
-        // 'pp' => $data->user->poto,
-        // 'status_activity' => "Update",
-        // 'status_jadwal' => $request->status,
-        // 'gambar' => $request->file('upload_bukti')->getClientOriginalName(),
-        // 'tanggal' => $data->tanggal,
-        // ];
-        // return dd($activityLog);
-
-
-        // if($request->fails()) {
-        //     return redirect()->back()->withErrors($request);
-        // }
-
         $data->status = $request->status;
         $img = $request->file('upload_bukti');
         if ($img == null) {
@@ -213,8 +184,6 @@ class ScheduleController extends Controller
             $data->upload_bukti = $request->file('upload_bukti')->getClientOriginalName();
         }
 
-
-        // DB::table('user_activity_log')->insert($activityLog);
         $data->update();
         // dd($data);
 
