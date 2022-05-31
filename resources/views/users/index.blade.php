@@ -132,10 +132,12 @@
                                         <td>{{ $d->email }}</td>
                                         <td>{{ $d->roles->pluck('name')->implode('') }}</td>
                                         <td>
-                                            <a class="btn btn-success btn-sm"><i class="fas fa-edit" data-toggle="modal"
-                                                    data-target="#modalUpdate{{ $d->id }}"></i></a>
-                                            <a class="btn btn-danger btn-sm"><i class="fas fa-trash" data-toggle="modal"
-                                                    data-target="#modalDelete{{ $d->id }}"></i></a>
+                                            <a class="btn btn-success btn-sm" data-toggle="modal"
+                                                data-target="#modalUpdate{{ $d->id }}"><i
+                                                    class="fas fa-edit"></i></a>
+                                            <a class="btn btn-danger btn-sm" data-toggle="modal"
+                                                data-target="#modalDelete{{ $d->id }}"><i
+                                                    class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

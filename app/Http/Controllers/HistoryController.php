@@ -11,11 +11,15 @@ class HistoryController extends Controller
 {
     public function index(Request $request) {
         $date = $request->tanggal;
-        if ($request->tanggal) {
+        $tanggal = Carbon::today()->format('Y-m-h');
+        if ($request->tanggal = $tanggal) {
+            $data = Schedule::where('tanggal',Carbon::today())->get();
+        } elseif($request->tanggal) {
             $data = Schedule::where('status','!=','On Progress')->where('tanggal',$request->tanggal)->get();
         } else {
-            $data = Schedule::whereDate('tanggal',Carbon::today())->get();
+            $data = Schedule::where('tanggal',Carbon::today())->get();
         }
+        // dd(Carbon::today());
         return view('history.index',compact(['data','date']));
     }
 

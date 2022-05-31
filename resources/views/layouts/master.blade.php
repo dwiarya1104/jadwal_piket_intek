@@ -74,37 +74,10 @@
                                 <label for="#" class="font-weight-bold h6 mt-3">Choose your profile picture</label>
                                 <input type="hidden" name="oldImage" value={{ \Auth::user()->poto }}>
                                 <div class="form-group">
-                                    <input type="file" class="form-control" name="poto">
+                                    <input type="file" class="form-control" name="poto" required>
                                 </div>
                             </div>
                         </div>
-                        {{-- @if (\Auth::user()->img)
-                            <img src="{{ asset('storage/bukti/' . \Auth::user()->img) }}" alt="" width="70%"
-                                style="display:flex;margin-left: auto; margin-right:auto">
-                        @else
-                            <h4 class="text-center my-5">No Image Yet</h4>
-                        @endif --}}
-                        {{-- <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="#" class="font-weight-bold h6">Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                                    name="name" id="email" placeholder="Name" value={{ \Auth::user()->name }}>
-                                @error('name')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="#" class="font-weight-bold h6">Username</label>
-                                <input type="text" class="form-control" name="username" id="email"
-                                    placeholder="Username" value={{ \Auth::user()->username }}>
-                            </div>
-                        </div>
-                        <label for="#" class="font-weight-bold h6 mt-3">Bukti</label>
-                        <div class="form-group">
-                            <input type="file" class="form-control" name="upload_bukti">
-                        </div> --}}
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-primary bt-sm right">Save Change</button>
@@ -141,20 +114,6 @@
             @endhasrole
             <!-- Divider -->
             <hr class="sidebar-divider">
-            {{-- <li class="nav-item {{request()->is('users.index')? 'active': ''}}">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Administrator</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('users.index')}}">Office Boys</a>
-                        {{-- <a class="collapse-item" href="{{route('admin.index')}}">Admins</a> --}}
-            {{-- </div> --}}
-            {{-- </div> --}}
-            {{-- </li> --}}
-
             <!-- Nav Item - Charts -->
             @hasrole('admin')
                 <li class="nav-item {{ request()->is('users*') ? 'active' : '' }}">
@@ -176,13 +135,6 @@
                         <span>Histories</span></a>
                 </li>
             @endhasrole
-            {{-- @hasrole('admin')
-                <li class="nav-item {{ request()->is('activity*') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('activities.index') }}">
-                        <i class="fas fa-fw fa-tasks"></i>
-                        <span>Activities</span></a>
-                </li>
-            @endhasrole --}}
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 

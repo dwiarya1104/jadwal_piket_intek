@@ -9,7 +9,7 @@
                     <div class="modal-body">
                         <i class="fas fa-exclamation-circle mb-2"
                             style="color: #e74a3b; font-size:120px; justify-content:center; display:flex"></i>
-                        <h5 class="text-center">Are you sure you want to delete this Schedule?</h5>
+                        <h5 class="text-center">Are you sure you want to delete this History?</h5>
                     </div>
                     <div class="modal-footer">
                         <form action="{{ url('history/delete/' . $del->id) }}" method="POST">
@@ -24,6 +24,132 @@
         </div>
     @endforeach
 
+
+    {{-- MODAL SHOW --}}
+
+    @foreach ($data as $da)
+        <div class="modal fade" id="exampleModalCenter{{ $da->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title font-weight-bold" id="exampleModalLongTitle">Detail Schedule</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @if ($da->upload_bukti)
+                            <img src="{{ asset('storage/bukti/' . $da->upload_bukti) }}" alt="" width="70%"
+                                style="display:flex;margin-left: auto; margin-right:auto">
+                        @else
+                            <h4 class="text-center my-5">No Image Yet</h4>
+                        @endif
+                        <hr>
+                        <div class="container">
+                            <div class="row justify-content-md-center">
+                                <div class="col col-lg">
+                                    Task Title
+                                </div>
+                                <div class="col-md-auto">
+                                    :
+                                </div>
+                                <div class="col col-lg">
+                                    <p>{{ $da->task_title }}</p>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-md-center">
+                                <div class="col col-lg">
+                                    Description
+                                </div>
+                                <div class="col-md-auto">
+                                    :
+                                </div>
+                                <div class="col col-lg">
+                                    <p>{{ $da->task_description }}</p>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-md-center">
+                                <div class="col col-lg">
+                                    AssigntTo
+                                </div>
+                                <div class="col-md-auto">
+                                    :
+                                </div>
+                                <div class="col col-lg">
+                                    <p>{{ $da->user->name }}</p>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-md-center">
+                                <div class="col col-lg">
+                                    Tanggal
+                                </div>
+                                <div class="col-md-auto">
+                                    :
+                                </div>
+                                <div class="col col-lg">
+                                    <p>{{ $da->tanggal }}</p>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-md-center">
+                                <div class="col col-lg">
+                                    Status
+                                </div>
+                                <div class="col-md-auto">
+                                    :
+                                </div>
+                                <div class="col col-lg">
+                                    @if ($da['status'] == 'On Progress')
+                                        <p class='badge badge-warning'>
+                                            {{ $da->status }}
+                                        </p>
+                                    @elseif ($da['status'] == 'Completed')
+                                        <p class='badge badge-success'>
+                                            {{ $da->status }}
+                                        </p>
+                                    @elseif ($da['status'] == 'Incompleted')
+                                        <p class='badge badge-danger'>
+                                            {{ $da->status }}
+                                        </p>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-md-center">
+                                <div class="col col-lg">
+                                    CreatedAt
+                                </div>
+                                <div class="col-md-auto">
+                                    :
+                                </div>
+                                <div class="col col-lg">
+                                    <p>{{ $da->created_at }}</p>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-md-center">
+                                <div class="col col-lg">
+                                    UpdatedAt
+                                </div>
+                                <div class="col-md-auto">
+                                    :
+                                </div>
+                                <div class="col col-lg">
+                                    <p>{{ $da->updated_at }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+    {{-- END MODAL SHOW --}}
 
 
 
@@ -58,17 +184,6 @@
                                 </div>
                             </div>
                         </form>
-                        {{-- <div class="row">
-                            <div class="col">
-                                <label for="">
-                                    Date :
-                                </label>
-                                <div class="col-4">
-                                    <input class="form-control float-left mb-3" type="date">
-                                    <button onclick={{ url('/history') }}>Filter</button>
-                                </div>
-                            </div>
-                        </div> --}}
                     @endhasrole
                     <div class="table-responsive">
                         <table class="table table-striped datatables" style="font-size:13px;" id="dataTable" width="100%"
@@ -114,8 +229,12 @@
                                         </td>
                                         <td>{{ $d->updated_at }}</td>
                                         <td>
-                                            <a class="btn btn-danger btn-sm"><i class="fas fa-trash" data-toggle="modal"
-                                                    data-target="#modalDelete{{ $d->id }}"></i></a>
+                                            <a class="btn btn-primary btn-sm" data-toggle="modal"
+                                                data-target="#exampleModalCenter{{ $d->id }}">
+                                                <i class="fas fa-eye"></i></a>
+                                            <a class="btn btn-danger btn-sm" data-toggle="modal"
+                                                data-target="#modalDelete{{ $d->id }}"><i
+                                                    class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

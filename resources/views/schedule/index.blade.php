@@ -323,13 +323,16 @@
                                             <td>
                                                 {{-- <a href="{{ route('schedule.edit', $schedule->id) }}"
                                                     class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a> --}}
-                                                <a class="btn btn-success btn-sm"><i class="fas fa-edit" data-toggle="modal"
-                                                        data-target="#modalUpdateAdmin{{ $schedule->id }}"></i></a>
+                                                <a class="btn btn-primary btn-sm" data-toggle="modal"
+                                                    data-target="#exampleModalCenter{{ $schedule->id }}">
+                                                    <i class="fas fa-eye"></i></a>
+                                                <a class="btn btn-success btn-sm" data-toggle="modal"
+                                                    data-target="#modalUpdateAdmin{{ $schedule->id }}"><i
+                                                        class="fas fa-edit"></i></a>
 
-                                                <a class="btn btn-danger btn-sm"><i class="fas fa-trash" data-toggle="modal"
-                                                        data-target="#modalDelete{{ $schedule->id }}"></i></a>
-                                                <a class="btn btn-primary btn-sm"><i class="fas fa-eye" data-toggle="modal"
-                                                        data-target="#exampleModalCenter{{ $schedule->id }}"></i></a>
+                                                <a class="btn btn-danger btn-sm" data-toggle="modal"
+                                                    data-target="#modalDelete{{ $schedule->id }}"><i
+                                                        class="fas fa-trash"></i></a>
 
                                             </td>
                                         </tr>
