@@ -45,7 +45,13 @@
                         <form id="filter-tanggal" method="GET" action={{ url('/history') }}>
                             <div class="row justify-content-start">
                                 <div class="col-3">
-                                    <input class="form-control float-left mb-3" type="date" name="tanggal">
+                                    @if ($date == null)
+                                        <input class="form-control float-left mb-3" type="date" name="tanggal"
+                                            value={{ Carbon\Carbon::now() }}>
+                                    @else
+                                        <input class="form-control float-left mb-3" type="date" name="tanggal"
+                                            value={{ $date }}>
+                                    @endif
                                 </div>
                                 <div class="col-4">
                                     <button type="submit" class="btn btn-primary">Filter</button>

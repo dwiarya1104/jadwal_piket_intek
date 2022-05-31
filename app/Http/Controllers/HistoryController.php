@@ -10,12 +10,13 @@ use Storage;
 class HistoryController extends Controller
 {
     public function index(Request $request) {
+        $date = $request->tanggal;
         if ($request->tanggal) {
             $data = Schedule::where('status','!=','On Progress')->where('tanggal',$request->tanggal)->get();
         } else {
             $data = Schedule::whereDate('tanggal',Carbon::today())->get();
         }
-        return view('history.index',compact(['data']));
+        return view('history.index',compact(['data','date']));
     }
 
     public function destroy($id) {
