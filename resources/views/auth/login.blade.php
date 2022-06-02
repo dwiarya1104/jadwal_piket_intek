@@ -10,6 +10,7 @@
     <meta name="author" content="">
 
     <title>Jadwal Piket | Login</title>
+    <link rel="icon" href="{{ asset('assets/img/sii_circle.svg') }}">
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet') }}" type="text/css">
