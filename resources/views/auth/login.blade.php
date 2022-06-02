@@ -41,7 +41,21 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         <div class="row mb-3">
-                                            <h4 class="float-left"><strong>Sign In</strong></h4>
+                                            <div class="col-12 mb-5  justify-content-center">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <img src="{{ asset('assets/img/sii_circle.svg') }}"
+                                                            width="30%" class="float-right" />
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h3 class="float-left"><strong>Jadwal
+                                                                Piket</strong></h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <h4 class="float-left"><strong>Sign In</strong></h4>
+                                            </div>
                                             {{-- <img src="{{asset('assets/img/sii_circle.svg')}}" width="10%" alt="">
                                             <div class="sidebar-brand-text mx-3"><h5>Jadwal Piket</h5></div> --}}
                                         </div>
