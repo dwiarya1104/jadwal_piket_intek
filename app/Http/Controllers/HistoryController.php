@@ -11,10 +11,7 @@ class HistoryController extends Controller
 {
     public function index(Request $request) {
         $date = $request->tanggal;
-        $tanggal = Carbon::today()->format('Y-m-h');
-        if ($request->tanggal = $tanggal) {
-            $data = Schedule::where('tanggal',Carbon::today())->get();
-        } elseif($request->tanggal) {
+        if ($request->tanggal) {
             $data = Schedule::where('status','!=','On Progress')->where('tanggal',$request->tanggal)->get();
         } else {
             $data = Schedule::where('tanggal',Carbon::today())->get();
