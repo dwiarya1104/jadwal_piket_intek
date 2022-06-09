@@ -21,6 +21,27 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+    <style>
+        @media only screen and (max-width: 600px) {
+            #img {
+                display: none;
+
+            }
+
+            .col-4 {
+                display: none;
+            }
+
+            #judul {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                justify-items: center;
+                align-self: center;
+            }
+        }
+    </style>
+
 </head>
 
 <body class="bg-grey">
@@ -45,9 +66,9 @@
                                                 <div class="row">
                                                     <div class="col-4">
                                                         <img src="{{ asset('assets/img/sii_circle.svg') }}"
-                                                            width="30%" class="float-right" />
+                                                            width="30%" class="float-right" id="img" />
                                                     </div>
-                                                    <div class="col-8">
+                                                    <div class="col-8 mx-auto" id="judul">
                                                         <h3 class="float-left"><strong>Jadwal
                                                                 Piket</strong></h3>
                                                     </div>
